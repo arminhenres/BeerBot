@@ -25,6 +25,7 @@ namespace Core
         /// </summary>
         public SerialBus()
         {
+            _serialPort = new SerialPort();
         }
         #endregion
 
@@ -145,7 +146,19 @@ namespace Core
         /// <returns>state whether initialization was successful</returns>
         public bool Init()
         {
-            throw new NotImplementedException();
+            _serialPort.DataReceived += new SerialDataReceivedEventHandler(On_MessageReceived);
+
+            if(!_serialPort.IsOpen)
+            {
+                _serialPort.Open();
+            }
+
+            return true;
+        }
+
+        private void On_MessageReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            MessageReceived(sender, e);
         }
 
         /// <summary>
