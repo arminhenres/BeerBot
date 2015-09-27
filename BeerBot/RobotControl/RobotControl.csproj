@@ -41,6 +41,13 @@
   <ItemGroup>
     <Compile Include="MoveMasterRobot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoboMessage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{68550694-e10e-493d-ae1a-2f2efa1f8684}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
