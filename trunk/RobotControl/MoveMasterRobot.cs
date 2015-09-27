@@ -33,5 +33,15 @@ namespace RobotControl
                 _connection.Deinit();
             }
         }
+
+        public void SendMessage(MoveMasterMessage message)
+        {
+            
+        }
+
+        public MoveMasterMessage BuildMessage()
+        {
+
+        }
     }
 }
