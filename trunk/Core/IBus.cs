@@ -16,6 +16,11 @@ namespace Core
         /// </summary>
         event EventHandler MessageReceived;
 
+        bool ConnectionActive
+        {
+            get;
+            set;
+        }
         /// <summary>
         /// Method to initialize Bus
         /// </summary>

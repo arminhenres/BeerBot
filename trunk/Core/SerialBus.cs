@@ -36,6 +36,11 @@ namespace Core
         #endregion
 
         #region Properties
+        public bool ConnectionActive
+        {
+            get;
+            set;
+        }
         /// <summary>
         /// Gets or sets the BaudRate
         /// </summary>
@@ -121,6 +126,14 @@ namespace Core
             set
             {
                 _serialPort.Handshake = value;
+            }
+        }
+
+        public bool DTR
+        {
+            set
+            {
+                _serialPort.DtrEnable = value;
             }
         }
         #endregion
