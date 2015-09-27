@@ -39,9 +39,11 @@ namespace RobotControl
             
         }
 
-        public MoveMasterMessage BuildMessage()
+        public MoveMasterMessage BuildMessage(List<string> commands)
         {
-
+            MoveMasterMessage message = new MoveMasterMessage();
+            
+            return new MoveMasterMessage();
         }
     }
 }
