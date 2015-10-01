@@ -8,5 +8,6 @@ namespace GUI
 {
     class Class1
     {
+
     }
 }
