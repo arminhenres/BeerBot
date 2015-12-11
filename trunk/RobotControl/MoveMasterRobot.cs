@@ -87,8 +87,9 @@ namespace RobotControl
         /// <param name="j3">angle 3</param>
         /// <param name="j4">angle 4</param>
         /// <param name="j5">angle 5</param>
-        public void MoveJoint(double j1, double j2, double j3, double j4, double j5)
+        public void MoveJoint(decimal j1, decimal j2, decimal j3, decimal j4, decimal j5, int speed)
         {
+            Speed(speed);
             SendMessage("MJ " + j1.ToString() + ", " + j2.ToString() + ", " + j3.ToString() + ", " + j4.ToString() + ", " + j5.ToString());
         }
 
@@ -116,11 +117,29 @@ namespace RobotControl
             SendMessage("OG");
         }
 
+        /// <summary>
+        /// Sets the Speed
+        /// </summary>
+        /// <param name="speed">Speed value to set, must be between 1 and 7</param>
+        public void Speed(int speed)
+        {
+            if(speed > 0 && speed < 8)
+            {
+                SendMessage("SP " + speed.ToString());
+            }
+            else
+            {
+                SendMessage("SP 5");
+            }
+            
+        }
         public void SaveFile(string path)
         {
             XmlWriter writer = XmlWriter.Create(path);
            
         }
+
+        
         /// <summary>
         /// Sends Message
         /// </summary>
