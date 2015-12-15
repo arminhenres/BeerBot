@@ -136,6 +136,11 @@ namespace RobotControl
         public void SaveFile(string path)
         {
             XmlWriter writer = XmlWriter.Create(path);
+            writer.WriteStartDocument();
+            foreach(string s in commands)
+            {
+                
+            }
            
         }
 
