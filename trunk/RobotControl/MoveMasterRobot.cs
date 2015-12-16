@@ -36,7 +36,7 @@ namespace RobotControl
             _connection.StopBits = StopBits.Two;
             _connection.RtsEnable = true;
             _connection.Handshake = Handshake.RequestToSend;
-            
+
         }
         #endregion
 
@@ -84,6 +84,7 @@ namespace RobotControl
         /// <param name="z">z coordinate</param>
         /// <param name="l1">l1 coordinate</param>
         /// <param name="l2">l2 coordinate</param>
+        /// <param name="instant">whether to execute command instant or not</param>
         public void MoveToPosition(double x, double y, double z, double l1, double l2, bool instant)
         {
             SendMessage("MP " + x.ToString() + ", " + y.ToString() + ", " + z.ToString() + ", " + l1.ToString() + ", " + l2.ToString(), instant);
@@ -97,13 +98,12 @@ namespace RobotControl
         /// <param name="j3">angle 3</param>
         /// <param name="j4">angle 4</param>
         /// <param name="j5">angle 5</param>
+        /// <param name="instant">whether to execute command instant or not</param>
         public void MoveJoint(decimal j1, decimal j2, decimal j3, decimal j4, decimal j5, int speed, bool instant)
         {
             string message = "MJ " + j1.ToString() + ", " + j2.ToString() + ", " + j3.ToString() + ", " + j4.ToString() + ", " + j5.ToString();
             Speed(speed, instant);
             SendMessage(message, instant);
-            
-            
         }
 
         /// <summary>
@@ -117,6 +117,7 @@ namespace RobotControl
         /// <summary>
         /// Moves to Nest Position
         /// </summary>
+        /// <param name="instant">whether to execute command instant or not</param>
         public void Nest(bool instant)
         {
             SendMessage("NT", instant);
@@ -125,6 +126,7 @@ namespace RobotControl
         /// <summary>
         /// Moves to Origin Position
         /// </summary>
+        /// <param name="instant">whether to execute command instant or not</param>
         public void Origin(bool instant)
         {
             SendMessage("OG", instant);
@@ -134,9 +136,10 @@ namespace RobotControl
         /// Sets the Speed
         /// </summary>
         /// <param name="speed">Speed value to set, must be between 1 and 7</param>
+        /// <param name="instant">whether to execute command instant or not</param>
         public void Speed(int speed, bool instant)
         {
-            if(speed > 0 && speed < 8)
+            if (speed > 0 && speed < 8)
             {
                 SendMessage("SP " + speed.ToString(), instant);
             }
@@ -144,48 +147,56 @@ namespace RobotControl
             {
                 SendMessage("SP 5", instant);
             }
-            
+
         }
+
+        /// <summary>
+        /// Saves all commands in commandsloop to xml file
+        /// </summary>
+        /// <param name="path">Directory and file name where to save to</param>
         public void SaveFile(string path)
         {
             XmlWriter writer = XmlWriter.Create(path);
             writer.WriteStartDocument();
             writer.WriteStartElement("Pipapo");
             int i = 0;
-            foreach(string s in commands)
+            foreach (string s in commands)
             {
-                writer.WriteElementString("Befehl_"+i.ToString(), s);
+                writer.WriteElementString("Befehl_" + i.ToString(), s);
                 i++;
             }
-            
+
             writer.WriteEndElement();
             writer.WriteEndDocument();
             writer.Flush();
-           
+
         }
 
-        
+
         /// <summary>
         /// Sends Message
         /// </summary>
         /// <param name="message"></param>
         private void SendMessage(string message, bool instant)
         {
-            if(instant)
+            if (instant)
             {
                 _connection.Write(message + "\r\n");
             }
             else
             {
-                commands.Add(message + "\r\n");                
+                commands.Add(message + "\r\n");
             }
-           
+
         }
 
+        /// <summary>
+        /// Executes all commands in loop
+        /// </summary>
         public void ExecuteCommands()
         {
             _isBusy = true;
-            foreach(string command in commands)
+            foreach (string command in commands)
             {
                 _connection.Write(command);
             }
