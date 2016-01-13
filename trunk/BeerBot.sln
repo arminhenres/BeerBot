@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ressources", "Ressources", 
 		..\Ressources\RobotControl.pdf = ..\Ressources\RobotControl.pdf
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplication1", "WpfApplication1\WpfApplication1.csproj", "{9B043792-6F8E-4DBE-B879-ACFE2C0C2BDF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{90FA6DD7-0743-4422-9DAA-26ED156608DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90FA6DD7-0743-4422-9DAA-26ED156608DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90FA6DD7-0743-4422-9DAA-26ED156608DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B043792-6F8E-4DBE-B879-ACFE2C0C2BDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B043792-6F8E-4DBE-B879-ACFE2C0C2BDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B043792-6F8E-4DBE-B879-ACFE2C0C2BDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B043792-6F8E-4DBE-B879-ACFE2C0C2BDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
