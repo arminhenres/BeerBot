@@ -82,7 +82,7 @@
                 
                     <Button Grid.Row="1" Grid.Column="5" Content="Save Settings" Command="{Binding SaveSettings}"/>
                 </Grid>
-                <!-- Einstellungen, falls nötig -->
+                <!-- Weitere Einstellungen, falls nötig -->
             </StackPanel>
         </Expander>
 
