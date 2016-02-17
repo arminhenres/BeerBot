@@ -5,6 +5,7 @@ using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 
@@ -15,11 +16,15 @@ namespace RobotControl
         #region Fields
         private SerialPort _connection;
 
+        private ManualResetEvent _mre = new ManualResetEvent(false);
+
         private List<string> commands;
 
         private bool _isInitialized;
 
         private bool _isBusy;
+
+        private string _returnString;
         #endregion
 
         #region Constructor
@@ -40,10 +45,32 @@ namespace RobotControl
         }
         #endregion
 
+        #region Properties
+        public List<String> CommandsList
+        {
+            get
+            {
+                return commands;
+            }
+        }
+        #endregion
+
         #region Methods
         private void OnDatateReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            throw new NotImplementedException();
+            string read = _connection.ReadExisting();
+            if (read.Contains("&H0000\r\n"))
+            {
+                _returnString = string.Empty;
+            }
+            else
+            {
+                _returnString = _returnString + read;
+
+                this._mre.Set();
+                
+            }
+            
         }
 
         /// <summary>
@@ -106,6 +133,12 @@ namespace RobotControl
             SendMessage(message, instant);
         }
 
+        public void MoveAbsolut(decimal j1, decimal j2, decimal j3, decimal j4, decimal j5, int speed, bool instant)
+        {
+            string message = "MP " + j1.ToString() + ", " + j2.ToString() + ", " + j3.ToString() + ", " + j4.ToString() + ", " + j5.ToString();
+            Speed(speed, instant);
+            SendMessage(message, instant);
+        }
         /// <summary>
         /// Resets Roboter state
         /// </summary>
@@ -114,6 +147,15 @@ namespace RobotControl
             SendMessage("RS", true);
         }
 
+        public void GripClose(bool instant)
+        {
+            SendMessage("GC", instant);
+        }
+
+        public void GripOpen(bool instant)
+        {
+            SendMessage("GO", instant);
+        }
         /// <summary>
         /// Moves to Nest Position
         /// </summary>
@@ -147,6 +189,24 @@ namespace RobotControl
             {
                 SendMessage("SP 5", instant);
             }
+
+        }
+        bool sent = false;
+        public string Where()
+        {
+            
+            _connection.Write("ID\r\n");
+            Thread.Sleep(100);
+            _connection.Write("DR\r\n");
+            Thread.Sleep(200);
+              
+            
+            _connection.Write("WH\r\n");
+            _connection.DiscardInBuffer();
+            _mre.Reset();
+            _mre.WaitOne();
+            Thread.Sleep(100);
+            return _returnString;
 
         }
 
