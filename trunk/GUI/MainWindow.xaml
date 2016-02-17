@@ -90,7 +90,10 @@
 
         <TabControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             <TabItem Header="BeerBot">
-                <!-- Oberfläche zum Bier einschenken -->
+                <TextBlock Background="Red" Foreground="Aqua" FontWeight="ExtraBlack" HorizontalAlignment="Center" TextAlignment="Center">Hinweis: Das eingeschenkte Bier ist nur in Maßen zu genießen. Alkohol ist keine Lösung, aber eine Alternative. <LineBreak/>
+                           Bitte stellen Sie das einzuschenkende Bier auf die vorgesehene Plattform auf dem Tisch!
+                </TextBlock>
+                
             </TabItem>
 
             <TabItem Header="Allgemeine Steuerung">
