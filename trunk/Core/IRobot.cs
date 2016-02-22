@@ -1,0 +1,42 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Core
+{
+    public interface IRobot
+    {
+        void Init();
+
+        void Deinit();
+
+        void MoveJoint(decimal j1, decimal j2, decimal j3, decimal j4, decimal j5, int speed, bool instant);
+
+        void MoveAbsolut(decimal j1, decimal j2, decimal j3, decimal j4, decimal j5, int speed, bool instant);
+
+        void Reset();
+
+        Coordinate Where();
+
+        void SaveFile(string path);
+
+        void ExecuteCommands();
+
+        void GripClose(bool instant);
+
+        void GripOpen(bool instant);
+
+        void Nest(bool instant);
+
+        void Origin(bool instant);
+
+        void Speed(int speed, bool instant);
+
+        List<string> CommandsList
+        {
+            get;
+        }
+    }
+}
