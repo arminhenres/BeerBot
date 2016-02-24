@@ -8,12 +8,15 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace RobotControl
 {
-    public class MoveMasterRobot :IRobot
+    public class MoveMasterRobot : IRobot
     {
         #region Fields
+        bool sent = false;
+
         private SerialPort _connection;
 
         private ManualResetEvent _mre = new ManualResetEvent(false);
@@ -56,6 +59,11 @@ namespace RobotControl
         #endregion
 
         #region Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnDatateReceived(object sender, SerialDataReceivedEventArgs e)
         {
             string read = _connection.ReadExisting();
@@ -68,9 +76,9 @@ namespace RobotControl
                 _returnString = _returnString + read;
 
                 this._mre.Set();
-                
+
             }
-            
+
         }
 
         /// <summary>
@@ -133,9 +141,15 @@ namespace RobotControl
             SendMessage(message, instant);
         }
 
-        public void MoveAbsolut(decimal j1, decimal j2, decimal j3, decimal j4, decimal j5, int speed, bool instant)
+        /// <summary>
+        /// Moves Roboter arm to given absolut coordinates
+        /// </summary>
+        /// <param name="coordinates">Coordinates to move to</param>
+        /// <param name="speed">Speed to move</param>
+        /// <param name="instant">whether to execute command instant or not</param>
+        public void MoveAbsolut(Coordinate coordinates, int speed, bool instant)
         {
-            string message = "MP " + j1.ToString() + ", " + j2.ToString() + ", " + j3.ToString() + ", " + j4.ToString() + ", " + j5.ToString();
+            string message = coordinates.ToString();
             Speed(speed, instant);
             SendMessage(message, instant);
         }
@@ -147,15 +161,24 @@ namespace RobotControl
             SendMessage("RS", true);
         }
 
+        /// <summary>
+        /// Closes Grip of Robot
+        /// </summary>
+        /// <param name="instant">whether to execute command instant or not</param>
         public void GripClose(bool instant)
         {
             SendMessage("GC", instant);
         }
 
+        /// <summary>
+        /// Opens Grip of Robot
+        /// </summary>
+        /// <param name="instant">whether to execute command instant or not</param>
         public void GripOpen(bool instant)
         {
             SendMessage("GO", instant);
         }
+
         /// <summary>
         /// Moves to Nest Position
         /// </summary>
@@ -191,16 +214,20 @@ namespace RobotControl
             }
 
         }
-        bool sent = false;
+
+        /// <summary>
+        /// Gets the current coordinates of the robot
+        /// </summary>
+        /// <returns>Coordinates of the robot</returns>
         public Coordinate Where()
         {
-            
+
             _connection.Write("ID\r\n");
             Thread.Sleep(100);
             _connection.Write("DR\r\n");
             Thread.Sleep(200);
-              
-            
+
+
             _connection.Write("WH\r\n");
             _connection.DiscardInBuffer();
             _mre.Reset();
@@ -222,7 +249,7 @@ namespace RobotControl
             int i = 0;
             foreach (string s in commands)
             {
-                writer.WriteElementString("Befehl_" + i.ToString(), s);
+                writer.WriteElementString("Befehl", s);
                 i++;
             }
 
@@ -232,9 +259,20 @@ namespace RobotControl
 
         }
 
+        /// <summary>
+        /// Reads commands out of File into commands buffer
+        /// </summary>
+        /// <param name="path">Path to file</param>
         public void ReadFile(string path)
         {
-            XmlReader reader = XmlReader.Create(path);
+            var document = XDocument.Load("Testausgabe.xml");
+
+            var commands = document.Descendants("Befehl");
+
+            foreach (var command in commands)
+            {
+                SendMessage(command.Value.Trim().Trim('\\').Trim('r').TrimEnd('n'), false);
+            }
         }
 
         /// <summary>
