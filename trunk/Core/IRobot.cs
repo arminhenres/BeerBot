@@ -14,7 +14,7 @@ namespace Core
 
         void MoveJoint(decimal j1, decimal j2, decimal j3, decimal j4, decimal j5, int speed, bool instant);
 
-        void MoveAbsolut(decimal j1, decimal j2, decimal j3, decimal j4, decimal j5, int speed, bool instant);
+        void MoveAbsolut(Coordinate coordinates, int speed, bool instant);
 
         void Reset();
 
@@ -33,6 +33,8 @@ namespace Core
         void Origin(bool instant);
 
         void Speed(int speed, bool instant);
+
+        void ReadFile(string path);
 
         List<string> CommandsList
         {

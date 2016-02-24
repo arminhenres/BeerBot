@@ -23,7 +23,7 @@ namespace Core
         public Coordinate(string name, string coordinates)
         {
             coordinates = coordinates.Trim().Trim('\\').Trim('r').TrimEnd('n');
-            char [] sep = new char[1];
+            char[] sep = new char[1];
             sep[0] = ',';
             var splitted = coordinates.Split(sep);
 
@@ -51,7 +51,7 @@ namespace Core
             {
                 return nameSet;
             }
-            
+
         }
 
         public decimal X
@@ -92,6 +92,18 @@ namespace Core
             {
                 return l2;
             }
+        }
+
+        public override string ToString()
+        {
+            string stringX = x.ToString().Replace(",", ".");
+            string stringY = y.ToString().Replace(",", ".");
+            string stringZ = z.ToString().Replace(",", ".");
+            string stringL1 = l1.ToString().Replace(",", ".");
+            string stringL2 = l2.ToString().Replace(",", ".");
+
+            string returnString = string.Format("{0},{1},{2},{3},{4}", stringX, stringY, stringZ, stringL1, stringL2);
+            return returnString;
         }
     }
 }
