@@ -11,7 +11,7 @@ using System.Xml;
 
 namespace RobotControl
 {
-    public class MoveMasterRobot
+    public class MoveMasterRobot :IRobot
     {
         #region Fields
         private SerialPort _connection;
@@ -192,7 +192,7 @@ namespace RobotControl
 
         }
         bool sent = false;
-        public string Where()
+        public Coordinate Where()
         {
             
             _connection.Write("ID\r\n");
@@ -206,7 +206,7 @@ namespace RobotControl
             _mre.Reset();
             _mre.WaitOne();
             Thread.Sleep(100);
-            return _returnString;
+            return new Coordinate(_returnString, "");
 
         }
 
@@ -232,6 +232,10 @@ namespace RobotControl
 
         }
 
+        public void ReadFile(string path)
+        {
+            XmlReader reader = XmlReader.Create(path);
+        }
 
         /// <summary>
         /// Sends Message
