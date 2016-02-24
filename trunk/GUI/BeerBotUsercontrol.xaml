@@ -27,11 +27,11 @@
 
             <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="Red" Foreground="Black" FontWeight="ExtraBlack" HorizontalAlignment="Left" TextAlignment="Center" VerticalAlignment="Center">Hinweis: Das eingeschenkte Bier ist nur in Maßen zu genießen. Alkohol ist keine Lösung, aber eine Alternative.
             </TextBlock>
-            <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">Bier eingelegt?</TextBlock>
-            <Button Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Click="Button_Click" Name="Button1" VerticalAlignment="Center">Done</Button>
-            <Button Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Visibility="Hidden" Name="Start" Click="Start_Click" VerticalAlignment="Center">Bier einschenken</Button>
-            <Button Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Visibility="Hidden" Name="ButtonNot" Click="NotButton_Click" VerticalAlignment="Center">Not Stopp</Button>
-            <ProgressBar Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Visibility="Hidden" Name="ProgressBar"></ProgressBar>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Bier eingelegt?" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Button Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Content="Done" Click="Button_Click" Name="Button1" VerticalAlignment="Center"/>
+            <Button Grid.Row="3" Grid.Column="1" Content="Bier einschenken" HorizontalAlignment="Center" Visibility="Hidden" Name="Start" Click="Start_Click" VerticalAlignment="Center"/>
+            <Button Grid.Row="3" Grid.Column="1" Content="Not Stopp" HorizontalAlignment="Center" Visibility="Hidden" Name="ButtonNot" Click="NotButton_Click" VerticalAlignment="Center"/> 
+            <ProgressBar Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Visibility="Hidden" Name="ProgressBar"/>
         </Grid>
     </Grid>
 </UserControl>
