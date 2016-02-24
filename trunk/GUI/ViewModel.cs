@@ -13,6 +13,7 @@ namespace GUI
 {
     public class ViewModel : NotifyPropertyChanged
     {
+        
         private MoveMasterRobot _robot;
         public ViewModel()
         {

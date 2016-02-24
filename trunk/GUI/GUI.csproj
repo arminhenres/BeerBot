@@ -119,6 +119,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{68550694-e10e-493d-ae1a-2f2efa1f8684}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RobotControl\RobotControl.csproj">
       <Project>{90fa6dd7-0743-4422-9daa-26ed156608de}</Project>
       <Name>RobotControl</Name>

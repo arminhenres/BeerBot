@@ -24,5 +24,24 @@ namespace GUI
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Button1.Background = Brushes.YellowGreen;
+            Start.Visibility = Visibility.Visible;
+        }
+
+        private void Start_Click(object sender, RoutedEventArgs e)
+        {
+            ProgressBar.Visibility = Visibility.Visible;
+           
+            
+        }
+
+        private void NotButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
     }
 }

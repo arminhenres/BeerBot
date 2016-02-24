@@ -5,7 +5,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:serial="clr-namespace:System.IO.Ports;assembly=System"
         xmlns:this="clr-namespace:GUI"
-        Title="RV-M1 Ansteuerung" Height="600" Width="800" BorderBrush="#33119EDA" BorderThickness="1">
+        Title="RV-M1 Ansteuerung" Height="600" Width="800" BorderBrush="#33119EDA" BorderThickness="1" ResizeMode="NoResize">
     <Window.Resources>
         <ObjectDataProvider x:Key="ParityEnum"
                             MethodName="GetValues" 
@@ -95,6 +95,7 @@
 
             <TabItem Header="Allgemeine Steuerung">
                 <!-- Allgemeine Funktionen wie "Fahre an Stelle x,y,z,l1,l2" oder ähnliches, evtl. eigenes UserControl -->
+                <this:GeneralFunctionsUserControl/>
             </TabItem>
         </TabControl>
     </Grid>
