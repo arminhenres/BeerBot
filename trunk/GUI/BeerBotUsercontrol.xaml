@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="GUI.BeerBotUsercontrol"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="800"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  Background="Red" Foreground="Aqua" FontWeight="ExtraBlack" HorizontalAlignment="Left" TextAlignment="Center" VerticalAlignment="Center">Hinweis: Das eingeschenkte Bier ist nur in Maßen zu genießen. Alkohol ist keine Lösung, aber eine Alternative.
+            </TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Background="Red">Bier eingelegt?</TextBlock>
+            <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">Done</Button>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -60,8 +60,22 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ActionCommand.cs" />
+    <Compile Include="BeerBotUsercontrol.xaml.cs">
+      <DependentUpon>BeerBotUsercontrol.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralFunctionsUserControl.xaml.cs">
+      <DependentUpon>GeneralFunctionsUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NotifyPropertyChanged.cs" />
     <Compile Include="ViewModel.cs" />
+    <Page Include="BeerBotUsercontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GeneralFunctionsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
