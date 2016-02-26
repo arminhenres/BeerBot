@@ -25,13 +25,14 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="Red" Foreground="Black" FontWeight="ExtraBlack" HorizontalAlignment="Left" TextAlignment="Center" VerticalAlignment="Center">Hinweis: Das eingeschenkte Bier ist nur in Maßen zu genießen. Alkohol ist keine Lösung, aber eine Alternative.
-            </TextBlock>
-            <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">Bier eingelegt?</TextBlock>
-            <Button Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Click="Button_Click" Name="Button1" VerticalAlignment="Center">Done</Button>
-            <Button Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Visibility="Hidden" Name="Start" Click="Start_Click" VerticalAlignment="Center">Bier einschenken</Button>
-            <Button Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Visibility="Hidden" Name="ButtonNot" Click="NotButton_Click" VerticalAlignment="Center">Not Stopp</Button>
-            <ProgressBar Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Visibility="Hidden" Name="ProgressBar"></ProgressBar>
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="Red" Foreground="Black" FontWeight="ExtraBlack" HorizontalAlignment="Left" TextAlignment="Center" VerticalAlignment="Center" Text="Hinweis: Das eingeschenkte Bier ist nur in Maßen zu genießen. Alkohol ist keine Lösung, aber eine Alternative."/>
+            
+            <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Bier eingelegt?"/>
+            <Button Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Click="Button_Click" Name="Button1" VerticalAlignment="Center" Content="Erledigt"/>
+            <Button Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Visibility="Hidden" Name="Bier_Start" Click="Bier_Start_Click" VerticalAlignment="Center" Content="Start"/>
+            <Button Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" Visibility="Hidden" Name="ButtonNot" Click="ButtonNot_Click" VerticalAlignment="Center" Content="Not-Stopp"/>
+            <ProgressBar Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Visibility="Hidden" Name="ProgressBar"/>
+            <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Name="LifeTicker" Text="Hier stehen dann die Lifekoordinaten" Visibility="Hidden" TextAlignment="Left" HorizontalAlignment="Center"/>
         </Grid>
     </Grid>
 </UserControl>

@@ -28,17 +28,18 @@ namespace GUI
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Button1.Background = Brushes.YellowGreen;
-            Start.Visibility = Visibility.Visible;
+            Bier_Start.Visibility = Visibility.Visible;
         }
 
-        private void Start_Click(object sender, RoutedEventArgs e)
+        private void Bier_Start_Click(object sender, RoutedEventArgs e)
         {
             ProgressBar.Visibility = Visibility.Visible;
+            LifeTicker.Visibility = Visibility.Visible;
            
             
         }
 
-        private void NotButton_Click(object sender, RoutedEventArgs e)
+        private void ButtonNot_Click (object sender, RoutedEventArgs e)
         {
             
         }
