@@ -21,7 +21,7 @@ namespace RobotControl
 
         private ManualResetEvent _mre = new ManualResetEvent(false);
 
-        private List<string> commands;
+        private List<RobotCommand> commands;
 
         private bool _isInitialized;
 
@@ -49,7 +49,7 @@ namespace RobotControl
         #endregion
 
         #region Properties
-        public List<String> CommandsList
+        public List<RobotCommand> CommandsList
         {
             get
             {
@@ -86,7 +86,7 @@ namespace RobotControl
         /// </summary>
         public void Init()
         {
-            commands = new List<string>();
+            commands = new List<RobotCommand>();
             _connection.DataReceived += new SerialDataReceivedEventHandler(this.OnDatateReceived);
             if (!_connection.IsOpen)
             {
@@ -112,20 +112,6 @@ namespace RobotControl
         }
 
         /// <summary>
-        /// Moves to specified position
-        /// </summary>
-        /// <param name="x">x coordinate</param>
-        /// <param name="y">y coordinate</param>
-        /// <param name="z">z coordinate</param>
-        /// <param name="l1">l1 coordinate</param>
-        /// <param name="l2">l2 coordinate</param>
-        /// <param name="instant">whether to execute command instant or not</param>
-        public void MoveToPosition(double x, double y, double z, double l1, double l2, bool instant)
-        {
-            SendMessage("MP " + x.ToString() + ", " + y.ToString() + ", " + z.ToString() + ", " + l1.ToString() + ", " + l2.ToString(), instant);
-        }
-
-        /// <summary>
         /// Turns by specified angles
         /// </summary>
         /// <param name="j1">angle 1</param>
@@ -136,9 +122,9 @@ namespace RobotControl
         /// <param name="instant">whether to execute command instant or not</param>
         public void MoveJoint(decimal j1, decimal j2, decimal j3, decimal j4, decimal j5, int speed, bool instant)
         {
-            string message = "MJ " + j1.ToString() + ", " + j2.ToString() + ", " + j3.ToString() + ", " + j4.ToString() + ", " + j5.ToString();
+            RobotCommand command = new RobotCommand("MJ",j1.ToString() + ", " + j2.ToString() + ", " + j3.ToString() + ", " + j4.ToString() + ", " + j5.ToString());
             Speed(speed, instant);
-            SendMessage(message, instant);
+            SendMessage(command, instant);
         }
 
         /// <summary>
@@ -149,7 +135,7 @@ namespace RobotControl
         /// <param name="instant">whether to execute command instant or not</param>
         public void MoveAbsolut(Coordinate coordinates, int speed, bool instant)
         {
-            string message = coordinates.ToString();
+            var message = new RobotCommand("MP", coordinates.ToString());
             Speed(speed, instant);
             SendMessage(message, instant);
         }
@@ -158,7 +144,7 @@ namespace RobotControl
         /// </summary>
         public void Reset()
         {
-            SendMessage("RS", true);
+            SendMessage(new RobotCommand("RS",""), true);
         }
 
         /// <summary>
@@ -167,7 +153,8 @@ namespace RobotControl
         /// <param name="instant">whether to execute command instant or not</param>
         public void GripClose(bool instant)
         {
-            SendMessage("GC", instant);
+            RobotCommand command = new RobotCommand("GC", "");
+            SendMessage(command, instant);
         }
 
         /// <summary>
@@ -176,7 +163,8 @@ namespace RobotControl
         /// <param name="instant">whether to execute command instant or not</param>
         public void GripOpen(bool instant)
         {
-            SendMessage("GO", instant);
+            RobotCommand command = new RobotCommand("GO", "");
+            SendMessage(command, instant);
         }
 
         /// <summary>
@@ -185,7 +173,8 @@ namespace RobotControl
         /// <param name="instant">whether to execute command instant or not</param>
         public void Nest(bool instant)
         {
-            SendMessage("NT", instant);
+            RobotCommand command = new RobotCommand("NT", "");
+            SendMessage(command, instant);
         }
 
         /// <summary>
@@ -194,7 +183,8 @@ namespace RobotControl
         /// <param name="instant">whether to execute command instant or not</param>
         public void Origin(bool instant)
         {
-            SendMessage("OG", instant);
+            RobotCommand command = new RobotCommand("OG", "");
+            SendMessage(command, instant);
         }
 
         /// <summary>
@@ -206,11 +196,13 @@ namespace RobotControl
         {
             if (speed > 0 && speed < 8)
             {
-                SendMessage("SP " + speed.ToString(), instant);
+                RobotCommand command = new RobotCommand("SP", speed.ToString());
+                SendMessage(command, instant);
             }
             else
             {
-                SendMessage("SP 5", instant);
+                RobotCommand command = new RobotCommand("SP", "5");
+                SendMessage(command, instant);
             }
 
         }
@@ -233,7 +225,7 @@ namespace RobotControl
             _mre.Reset();
             _mre.WaitOne();
             Thread.Sleep(100);
-            return new Coordinate(_returnString, "");
+            return new Coordinate("", _returnString);
 
         }
 
@@ -243,13 +235,20 @@ namespace RobotControl
         /// <param name="path">Directory and file name where to save to</param>
         public void SaveFile(string path)
         {
-            XmlWriter writer = XmlWriter.Create(path);
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Indent = true;
+            XmlWriter writer = XmlWriter.Create(path, settings);
+
+            
             writer.WriteStartDocument();
             writer.WriteStartElement("Pipapo");
             int i = 0;
-            foreach (string s in commands)
+            foreach (RobotCommand s in commands)
             {
-                writer.WriteElementString("Befehl", s);
+                writer.WriteStartElement("Befehl");
+                writer.WriteAttributeString("Command", s.CommandType);
+                writer.WriteAttributeString("Parameters",s.Parameters);
+                writer.WriteEndElement();
                 i++;
             }
 
@@ -265,13 +264,14 @@ namespace RobotControl
         /// <param name="path">Path to file</param>
         public void ReadFile(string path)
         {
-            var document = XDocument.Load("Testausgabe.xml");
+            var document = XDocument.Load(path);
 
-            var commands = document.Descendants("Befehl");
-
-            foreach (var command in commands)
+            var elements = document.Descendants("Befehl");
+            commands.Clear();
+            foreach (var command in elements)
             {
-                SendMessage(command.Value.Trim().Trim('\\').Trim('r').TrimEnd('n'), false);
+                commands.Add(new RobotCommand(command.Attribute("Command").Value, command.Attribute("Parameters").Value));
+                
             }
         }
 
@@ -279,15 +279,15 @@ namespace RobotControl
         /// Sends Message
         /// </summary>
         /// <param name="message"></param>
-        private void SendMessage(string message, bool instant)
+        private void SendMessage(RobotCommand message, bool instant)
         {
             if (instant)
             {
-                _connection.Write(message + "\r\n");
+                _connection.Write(message.ToString());
             }
             else
             {
-                commands.Add(message + "\r\n");
+                commands.Add(message);
             }
 
         }
@@ -298,12 +298,13 @@ namespace RobotControl
         public void ExecuteCommands()
         {
             _isBusy = true;
-            foreach (string command in commands)
+            foreach (RobotCommand command in commands)
             {
-                _connection.Write(command);
+                SendMessage(command,true);
             }
             _isBusy = false;
         }
         #endregion
+               
     }
 }
