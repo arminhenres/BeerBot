@@ -36,7 +36,7 @@ namespace Core
 
         void ReadFile(string path);
 
-        List<string> CommandsList
+        List<RobotCommand> CommandsList
         {
             get;
         }
