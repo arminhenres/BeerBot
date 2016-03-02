@@ -1,74 +1,8 @@
 ﻿<Controls:MetroWindow x:Class="HilfsGUI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:this="clr-namespace:HilfsGUI"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         Title="MainWindow" Height="350" Width="800" BorderBrush="Blue" BorderThickness="2">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.Column="3" FontWeight="Bold" Content="Coordinates" VerticalAlignment="Bottom"/>
-        <StackPanel Grid.Row="0" Grid.Column="4" Orientation="Horizontal" VerticalAlignment="Bottom">
-            <Button Content="Save" Command="{Binding SaveCoordinatesCommand}"/>
-            <Button Content="Load" Command="{Binding LoadCoordinatesCommand}"/>
-        </StackPanel>
-        <GroupBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Header="Move Absolut">
-            <StackPanel Orientation="Horizontal">
-                <StackPanel Height="30" Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center">
-            <Controls:NumericUpDown Value="{Binding XAbsolut}"/>
-                    <Controls:NumericUpDown Value="{Binding YAbsolut}"/>
-                    <Controls:NumericUpDown Value="{Binding ZAbsolut}"/>
-                    <Controls:NumericUpDown Value="{Binding L1Absolut}"/>
-                    <Controls:NumericUpDown Value="{Binding L2Absolut}"/>
-        </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Center">
-            <Button Content="Save Coordinate" Command="{Binding AddCoordinateCommand}"/>
-            <Button Content="Save Command" Command="{Binding SaveCoordinatesCommand}"/>
-            <Button Content="Reset" Command="{Binding LoadCoordinatesCommand}"/>
-            <Button Content="Move Instant" Command="{Binding LoadCoordinatesCommand}"/>
-        </StackPanel>
-            </StackPanel>
-        </GroupBox>
-        <GroupBox Header="Move Joint" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
-            <StackPanel Orientation="Horizontal">
-                <StackPanel Height="30" Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center">
-                    <Controls:NumericUpDown Value="{Binding XJoint}"/>
-                    <Controls:NumericUpDown Value="{Binding YJoint}"/>
-                    <Controls:NumericUpDown Value="{Binding ZJoint}"/>
-                    <Controls:NumericUpDown Value="{Binding L1Joint}"/>
-                    <Controls:NumericUpDown Value="{Binding L2Joint}"/>
-                </StackPanel>
-                <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Center">
-                    <Button Content="Save Command" Command="{Binding AddCoordinateCommand}"/>
-                    <Button Content="Reset" Command="{Binding SaveCoordinatesCommand}"/>
-                    <Button Content="Move Instant" Command="{Binding LoadCoordinatesCommand}"/>
-                </StackPanel>
-            </StackPanel>
-        </GroupBox>
-        
-        <ListView Grid.Row="1" Grid.Column="3" Grid.RowSpan="1" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="1" ItemsSource="{Binding Coordinates}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn Header="X" DisplayMemberBinding="{Binding X}"/>
-                    <GridViewColumn Header="Y" DisplayMemberBinding="{Binding Y}"/>
-                    <GridViewColumn Header="Z" DisplayMemberBinding="{Binding Z}"/>
-                    <GridViewColumn Header="L1" DisplayMemberBinding="{Binding L1}"/>
-                    <GridViewColumn Header="L2" DisplayMemberBinding="{Binding L2}"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        
-    </Grid>
+    <this:GeneralUserControl/>
 </Controls:MetroWindow>
