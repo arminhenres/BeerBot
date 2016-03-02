@@ -39,6 +39,8 @@ namespace HilfsGUI
             MoveInstantAbsolutCommand = new ActionCommand(MoveInstantAbsolut);
             SaveCommandsCommand = new ActionCommand(SaveCommands);
             LoadCommandsCommand = new ActionCommand(LoadCommands);
+            WhereCommand = new ActionCommand(Where);
+
         }
 
         
@@ -444,7 +446,7 @@ namespace HilfsGUI
             OnPropertyChanged("L2Where");
         }
 
-        public void AddCoordinateWhereCommand()
+        public void AddCoordinateWhere()
         {
             Coordinates.Add(new Coordinate(XWhere, YWhere, ZWhere, L1Where, L2Where, "Coordinate " + _coordinateCounter));
             _coordinateCounter++;

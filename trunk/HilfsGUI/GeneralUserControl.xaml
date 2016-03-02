@@ -1,0 +1,160 @@
+﻿<UserControl x:Class="HilfsGUI.GeneralUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+            <GroupBox Header="Move Absolut">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Height="30" Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center">
+                        <Controls:NumericUpDown Value="{Binding XAbsolut}"/>
+                        <Controls:NumericUpDown Value="{Binding YAbsolut}"/>
+                        <Controls:NumericUpDown Value="{Binding ZAbsolut}"/>
+                        <Controls:NumericUpDown Value="{Binding L1Absolut}"/>
+                        <Controls:NumericUpDown Value="{Binding L2Absolut}"/>
+                        <Controls:NumericUpDown Value="{Binding SpeedAbsolut}"/>
+                        <TextBox Text="{Binding NameAbsolut}"/>
+                    </StackPanel>
+                    <StackPanel VerticalAlignment="Center">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Button Content="Save Coordinate" Command="{Binding AddCoordinateCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="0" Grid.Row="0"/>
+                            <Button Content="Save Command" Command="{Binding SaveCoordinatesCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="0" Grid.Row="1"/>
+                            <Button Content="Reset" Command="{Binding LoadCoordinatesCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="1" Grid.Row="0"/>
+                            <Button Content="Move Instant" Command="{Binding LoadCoordinatesCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="1" Grid.Row="1"/>
+                        </Grid>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            
+            <GroupBox Header="Move Joint" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Height="30" Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center">
+                        <Controls:NumericUpDown Value="{Binding XJoint}"/>
+                        <Controls:NumericUpDown Value="{Binding YJoint}"/>
+                        <Controls:NumericUpDown Value="{Binding ZJoint}"/>
+                        <Controls:NumericUpDown Value="{Binding L1Joint}"/>
+                        <Controls:NumericUpDown Value="{Binding L2Joint}"/>
+                        <Controls:NumericUpDown Value="{Binding SpeedJoint}"/>
+                    </StackPanel>
+                    <StackPanel VerticalAlignment="Center">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Button Content="Save Command" Command="{Binding AddCoordinateCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="0" Grid.Row="0"/>
+                            <Button Content="Reset" Command="{Binding SaveCoordinatesCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="0" Grid.Row="1"/>
+                            <Button Content="Move Instant" Command="{Binding LoadCoordinatesCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="1" Grid.Row="0"/>
+                        </Grid>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox  Header="Where">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Height="30" Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center">
+                            <Label Content="{Binding XWhere}"/>
+                            <Label Content="{Binding YWhere}"/>
+                            <Label Content="{Binding ZWhere}"/>
+                            <Label Content="{Binding L1Where}"/>
+                            <Label Content="{Binding L2Where}"/>
+                        </StackPanel>
+                        <StackPanel VerticalAlignment="Center">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                            <Button Content="Coordinates" Command="{Binding WhereCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="0" Grid.Row="0"/>                                
+                                <Button Content="Add to List" Command="{Binding AddCoordinateToList}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="1" Grid.Row="0"/>                                
+                            </Grid>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>            
+        </StackPanel>
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Column="0" Grid.Row="0" Content="Coordinates" FontWeight="Bold" VerticalAlignment="Center"/>
+            <Button Grid.Column="1" Grid.Row="0" Content="save" Command="{Binding Save}" Style="{DynamicResource SquareButtonStyle}"/>
+            <Button Grid.Column="2" Grid.Row="0" Content="load" Command="{Binding Load}" Style="{DynamicResource SquareButtonStyle}"/>
+            <ListView Grid.Row="1" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="1" ItemsSource="{Binding Coordinates}" Margin="5,0,10,0">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Header="X" DisplayMemberBinding="{Binding X}"/>
+                        <GridViewColumn Header="Y" DisplayMemberBinding="{Binding Y}"/>
+                        <GridViewColumn Header="Z" DisplayMemberBinding="{Binding Z}"/>
+                        <GridViewColumn Header="L1" DisplayMemberBinding="{Binding L1}"/>
+                        <GridViewColumn Header="L2" DisplayMemberBinding="{Binding L2}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </Grid>
+
+
+
+
+
+
+
+
+
+
+
+        <!--<Grid>
+       
+
+        <ListView Grid.Row="1" Grid.Column="3" Grid.RowSpan="1" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="1" ItemsSource="{Binding Coordinates}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="X" DisplayMemberBinding="{Binding X}"/>
+                    <GridViewColumn Header="Y" DisplayMemberBinding="{Binding Y}"/>
+                    <GridViewColumn Header="Z" DisplayMemberBinding="{Binding Z}"/>
+                    <GridViewColumn Header="L1" DisplayMemberBinding="{Binding L1}"/>
+                    <GridViewColumn Header="L2" DisplayMemberBinding="{Binding L2}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        </Grid>-->
+</UserControl>
