@@ -8,7 +8,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -18,7 +18,7 @@
         <StackPanel>
             <GroupBox Header="Move Absolut">
                 <StackPanel Orientation="Horizontal">
-                    <StackPanel Height="30" Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <Controls:NumericUpDown Value="{Binding XAbsolut}"/>
                         <Controls:NumericUpDown Value="{Binding YAbsolut}"/>
                         <Controls:NumericUpDown Value="{Binding ZAbsolut}"/>
@@ -46,9 +46,9 @@
                 </StackPanel>
             </GroupBox>
             
-            <GroupBox Header="Move Joint" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+            <GroupBox Header="Move Joint" >
                 <StackPanel Orientation="Horizontal">
-                    <StackPanel Height="30" Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <Controls:NumericUpDown Value="{Binding XJoint}"/>
                         <Controls:NumericUpDown Value="{Binding YJoint}"/>
                         <Controls:NumericUpDown Value="{Binding ZJoint}"/>
@@ -75,28 +75,35 @@
             </GroupBox>
             <GroupBox  Header="Where">
                     <StackPanel Orientation="Horizontal">
-                        <StackPanel Height="30" Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center">
-                            <Label Content="{Binding XWhere}"/>
-                            <Label Content="{Binding YWhere}"/>
-                            <Label Content="{Binding ZWhere}"/>
-                            <Label Content="{Binding L1Where}"/>
-                            <Label Content="{Binding L2Where}"/>
-                        </StackPanel>
-                        <StackPanel VerticalAlignment="Center">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                            <Button Content="Coordinates" Command="{Binding WhereCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="0" Grid.Row="0"/>                                
-                                <Button Content="Add to List" Command="{Binding AddCoordinateToList}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="1" Grid.Row="0"/>                                
-                            </Grid>
-                        </StackPanel>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" Grid.Row="0" Content="X"/>
+                            <Label Grid.Column="1" Grid.Row="0" Content="Y"/>
+                            <Label Grid.Column="2" Grid.Row="0" Content="Z"/>
+                            <Label Grid.Column="3" Grid.Row="0" Content="L1"/>
+                            <Label Grid.Column="4" Grid.Row="0" Content="L2"/>
+                            <Label Grid.Column="0" Grid.Row="1" Content="{Binding XWhere}"/>
+                            <Label Grid.Column="1" Grid.Row="1" Content="{Binding YWhere}"/>
+                            <Label Grid.Column="2" Grid.Row="1" Content="{Binding ZWhere}"/>
+                            <Label Grid.Column="3" Grid.Row="1" Content="{Binding L1Where}"/>
+                            <Label Grid.Column="4" Grid.Row="1" Content="{Binding L2Where}"/>
+                            <Button Content="Coordinates" Command="{Binding WhereCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="5" Grid.Row="0"/>
+                            <Button Content="Add to List" Command="{Binding AddCoordinateToList}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="5" Grid.Row="1"/>
+                        </Grid>
                     </StackPanel>
+                </StackPanel>
                 </GroupBox>            
         </StackPanel>
         <Grid Grid.Column="1">
