@@ -11,15 +11,17 @@ using System.Xml;
 
 namespace GUI
 {
-    public class ViewModel : NotifyPropertyChanged
+    public class MainViewModel : NotifyPropertyChanged
     {
-        
+
+        GeneralViewModel _generalViewModel;
         private MoveMasterRobot _robot;
-        public ViewModel()
+        public MainViewModel()
         {
             _robot = new MoveMasterRobot();
             SaveSettings = new ActionCommand(SaveSettingsCommand);
             ReadSettings();
+            _generalViewModel = new GeneralViewModel(_robot);
         }
 
         private void SaveSettingsCommand()
@@ -188,6 +190,17 @@ namespace GUI
             }
         }
 
+        public GeneralViewModel GeneralViewModelProp
+        {
+            get
+            {
+                return _generalViewModel;
+            }
+            set
+            {
+                _generalViewModel = value;
+            }
+        }
         private StopBits _stopBits;
         public StopBits StopBit
         {
@@ -207,5 +220,6 @@ namespace GUI
             get;
             set;
         }
+               
     }
 }

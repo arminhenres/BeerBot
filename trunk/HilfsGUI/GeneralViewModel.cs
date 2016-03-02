@@ -2,25 +2,19 @@
 using Microsoft.Win32;
 using RobotControl;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 
 namespace HilfsGUI
 {
-	public class ViewModel : NotifyPropertyChanged
+    public class GeneralViewModel : NotifyPropertyChanged
 	{
 		private MoveMasterRobot _robot;
 
 		private int _coordinateCounter;
 		
-		public ViewModel()
+		public GeneralViewModel()
 		{
 			
 			_coordinateCounter = 0;
@@ -516,6 +510,8 @@ namespace HilfsGUI
 			var speed = Int32.Parse(SpeedJoint);
 			Coordinate coordinate = new Coordinate(XJoint, YJoint, ZJoint, L1Joint, L2Joint, "InstantMove");
 			_robot.MoveJoint(coordinate.X, coordinate.Y, coordinate.Z, coordinate.L1, coordinate.L2, speed, false);
+            Commands = new ObservableCollection<RobotCommand>(_robot.CommandsList);
+            OnPropertyChanged("Commands");
 		}
 
 		public void SaveCommands()

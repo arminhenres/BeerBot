@@ -66,8 +66,9 @@
     <Compile Include="GeneralFunctionsUserControl.xaml.cs">
       <DependentUpon>GeneralFunctionsUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GeneralViewModel.cs" />
     <Compile Include="NotifyPropertyChanged.cs" />
-    <Compile Include="ViewModel.cs" />
+    <Compile Include="MainViewModel.cs" />
     <Page Include="BeerBotUsercontrol.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

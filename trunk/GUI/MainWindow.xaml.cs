@@ -24,7 +24,7 @@ namespace GUI
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new ViewModel();
+            this.DataContext = new MainViewModel();
         }
     }
 }
