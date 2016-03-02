@@ -37,8 +37,8 @@
                             <Label Grid.Column="2" Grid.Row="0" Content="Z"/>
                             <Label Grid.Column="3" Grid.Row="0" Content="L1"/>
                             <Label Grid.Column="4" Grid.Row="0" Content="L2"/>
-                            <Label Grid.Column="5" Grid.Row="0" Content="Name Absoulut"/>
-                            <Label Grid.Column="6" Grid.Row="0" Content="Speed"/>
+                            <Label Grid.Column="5" Grid.Row="0" Content="Speed"/>
+                            <Label Grid.Column="6" Grid.Row="0" Content="Name"/>
                             <Controls:NumericUpDown Grid.Column="0" Grid.Row="1" Value="{Binding XAbsolut}"/>
                             <Controls:NumericUpDown Grid.Column="1" Grid.Row="1" Value="{Binding YAbsolut}"/>
                             <Controls:NumericUpDown Grid.Column="2" Grid.Row="1" Value="{Binding ZAbsolut}"/>
@@ -59,9 +59,9 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Button Content="Save Coordinate" Command="{Binding AddCoordinateCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="0" Grid.Row="0"/>
-                            <Button Content="Save Command" Command="{Binding SaveCoordinatesCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="0" Grid.Row="1"/>
-                            <Button Content="Reset" Command="{Binding LoadCoordinatesCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="1" Grid.Row="0"/>
-                            <Button Content="Move Instant" Command="{Binding LoadCoordinatesCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="1" Grid.Row="1"/>
+                            <Button Content="Save Command" Command="{Binding AddCommandAbsolutCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="0" Grid.Row="1"/>
+                            <Button Content="Reset" Command="{Binding ResetAbsolutCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="1" Grid.Row="0"/>
+                            <Button Content="Move Instant" Command="{Binding MoveInstantAbsolutCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="1" Grid.Row="1"/>
                         </Grid>
                     </StackPanel>
                 </StackPanel>
@@ -108,13 +108,14 @@
                                 <RowDefinition/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <Button Content="Save Command" Command="{Binding AddCoordinateCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="0" Grid.Row="0"/>
-                            <Button Content="Reset" Command="{Binding SaveCoordinatesCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="0" Grid.Row="1"/>
-                            <Button Content="Move Instant" Command="{Binding LoadCoordinatesCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="1" Grid.Row="0"/>
+                            <Button Content="Save Command" Command="{Binding AddCommandJointCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="0" Grid.Row="0"/>
+                            <Button Content="Reset" Command="{Binding ResetJointCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="0" Grid.Row="1"/>
+                            <Button Content="Move Instant" Command="{Binding MoveInstantJointCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="1" Grid.Row="0"/>
                         </Grid>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
+        	
             <GroupBox  Header="Where">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -142,11 +143,12 @@
                             <Label Grid.Column="3" Grid.Row="1" Content="{Binding L1Where}"/>
                             <Label Grid.Column="4" Grid.Row="1" Content="{Binding L2Where}"/>
                             <Button Content="Coordinates" Command="{Binding WhereCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="5" Grid.Row="0"/>
-                            <Button Content="Add to List" Command="{Binding AddCoordinateToList}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="5" Grid.Row="1"/>
+                            <Button Content="Add to List" Command="{Binding AddCoordinateWhereCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="5" Grid.Row="1"/>
                         </Grid>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
+        	
             <GroupBox Header="Buttons">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -162,13 +164,14 @@
                                 <RowDefinition/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <Button Content="Origin" Command="{Binding Origin}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="0" Grid.Row="0"/>
-                            <Button Content="Nest" Command="{Binding Nest}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="0" Grid.Row="1"/>
-                            <Button Content="Reset" Command="{Binding Reset}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="1" Grid.Row="0"/>
+                            <Button Content="Origin" Command="{Binding OriginCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="0" Grid.Row="0"/>
+                            <Button Content="Nest" Command="{Binding NestCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="0" Grid.Row="1"/>
+                            <Button Content="Reset" Command="{Binding ResetCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="1" Grid.Row="0"/>
                         </Grid>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
+        	
             <GroupBox Header="Grip">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -187,10 +190,10 @@
                             </Grid.RowDefinitions>
                             <Label Grid.Column="0" Grid.Row="0" Content="Open"/>
                             <Label Grid.Column="0" Grid.Row="1" Content="Close"/>
-                            <Button Content="Add" Command="{Binding AddToCoordinate}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="1" Grid.Row="0"/>
-                            <Button Content="Add" Command="{Binding AddToCoordinate}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="1" Grid.Row="1"/>
-                            <Button Content="Instant" Command="{Binding Instant}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="2" Grid.Row="0"/>
-                            <Button Content="Instant" Command="{Binding Instant}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="2" Grid.Row="1"/>
+                            <Button Content="Add" Command="{Binding AddGripOpenCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="1" Grid.Row="0"/>
+                            <Button Content="Add" Command="{Binding AddGripCloseCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="1" Grid.Row="1"/>
+                            <Button Content="Instant" Command="{Binding GripOpenInstantCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="2" Grid.Row="0"/>
+                            <Button Content="Instant" Command="{Binding GripCloseInstantCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1" Grid.Column="2" Grid.Row="1"/>
                         </Grid>
                     </StackPanel>
                 </StackPanel>

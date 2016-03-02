@@ -44,6 +44,7 @@ namespace RobotControl
             _connection.StopBits = StopBits.Two;
             _connection.RtsEnable = true;
             _connection.Handshake = Handshake.RequestToSend;
+            commands = new List<RobotCommand>();
 
         }
         #endregion
@@ -86,7 +87,6 @@ namespace RobotControl
         /// </summary>
         public void Init()
         {
-            commands = new List<RobotCommand>();
             _connection.DataReceived += new SerialDataReceivedEventHandler(this.OnDatateReceived);
             if (!_connection.IsOpen)
             {
