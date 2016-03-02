@@ -16,15 +16,29 @@ namespace HilfsGUI
 {
     public class ViewModel : NotifyPropertyChanged
     {
-        int i;
+        MoveMasterRobot _robot;
+
+        int _coordinateCounter;
+        
         public ViewModel()
         {
+            _coordinateCounter = 0;
+            _robot = new MoveMasterRobot();
+
             Coordinates = new ObservableCollection<Coordinate>();
-            int i = 0;
+            Commands = new ObservableCollection<RobotCommand>();
+            
             AddCoordinateCommand = new ActionCommand(AddCoordinate);
             SaveCoordinatesCommand = new ActionCommand(SaveCoordinates);
             LoadCoordinatesCommand = new ActionCommand(LoadCoordinates);
             ResetAbsolutCommand = new ActionCommand(ResetAbsolut);
+            ResetJointCommand = new ActionCommand(ResetJoint);
+            AddCommandJointCommand = new ActionCommand(AddCommandJoint);
+            AddCommandAbsolutCommand = new ActionCommand(AddCommandAbsolut);
+            MoveInstantJointCommand = new ActionCommand(MoveInstantJoint);
+            MoveInstantAbsolutCommand = new ActionCommand(MoveInstantAbsolut);
+            SaveCommandsCommand = new ActionCommand(SaveCommands);
+            LoadCommandsCommand = new ActionCommand(LoadCommands);
         }
 
         
@@ -36,6 +50,13 @@ namespace HilfsGUI
             set;
         }
 
+        public ObservableCollection<RobotCommand> Commands
+        {
+            get;
+            set;
+        }
+
+        #region Absolutkoordinaten
         public string XAbsolut
         {
             get;
@@ -65,7 +86,9 @@ namespace HilfsGUI
             get;
             set;
         }
+        #endregion
 
+        #region Jointkoordinaten
         public string XJoint
         {
             get;
@@ -97,6 +120,64 @@ namespace HilfsGUI
         }
         #endregion
 
+        #region Where-Koordinaten
+        public string XWhere
+        {
+            get;
+            set;
+        }
+
+        public string YWhere
+        {
+            get;
+            set;
+        }
+
+        public string ZWhere
+        {
+            get;
+            set;
+        }
+
+        public string L1Where
+        {
+            get;
+            set;
+        }
+
+        public string L2Where
+        {
+            get;
+            set;
+        }
+        #endregion
+
+        
+        public string NameAbsolut
+        {
+            get;
+            set;
+        }
+
+        public string NameJoint
+        {
+            get;
+            set;
+        }
+
+        public string SpeedAbsolut
+        {
+            get;
+            set;
+        }
+
+        public string SpeedJoint
+        {
+            get;
+            set;
+        }
+        #endregion
+
         #region ActionCommands
         public ActionCommand AddCoordinateCommand
         {
@@ -121,13 +202,13 @@ namespace HilfsGUI
             get;
             set;
         }
+
         public ActionCommand AddCommandAbsolutCommand
         {
             get;
             set;
         }
-
-
+        
         public ActionCommand ResetAbsolutCommand
         {
             get;
@@ -147,6 +228,30 @@ namespace HilfsGUI
         }
 
         public ActionCommand MoveInstantAbsolutCommand
+        {
+            get;
+            set;
+        }
+
+        public ActionCommand SaveCommandsCommand
+        {
+            get;
+            set;
+        }
+
+        public ActionCommand LoadCommandsCommand
+        {
+            get;
+            set;
+        }
+
+        public ActionCommand WhereCommand
+        {
+            get;
+            set;
+        }
+
+        public ActionCommand AddCoordinateWhereCommand
         {
             get;
             set;
@@ -182,11 +287,7 @@ namespace HilfsGUI
             }
 
 
-            while(Coordinates.Any(x => Int32.Parse(x.Name.Replace("#",""))>=i))
-            {
-                i++;
-            }
-            Coordinates.Add(new Coordinate(XAbsolut, YAbsolut, ZAbsolut, L1Absolut, L2Absolut, "#"+i.ToString()));
+            Coordinates.Add(new Coordinate(XAbsolut, YAbsolut, ZAbsolut, L1Absolut, L2Absolut, NameAbsolut));
             OnPropertyChanged("Coordinates");
             
         }
@@ -267,6 +368,88 @@ namespace HilfsGUI
             L2Joint = "0";
         }
 
+        public void MoveInstantAbsolut()
+        {
+            var speed = Int32.Parse(SpeedAbsolut);
+            Coordinate coordinate = new Coordinate(XAbsolut, YAbsolut, ZAbsolut, L1Absolut, L2Absolut, "InstantMove");
+            _robot.MoveAbsolut(coordinate, speed, true);
+        }
+
+        public void MoveInstantJoint()
+        {
+            var speed = Int32.Parse(SpeedJoint);
+            Coordinate coordinate = new Coordinate(XJoint, YJoint, ZJoint, L1Joint, L2Joint, "InstantMove");
+            _robot.MoveJoint(coordinate.X, coordinate.Y, coordinate.Z, coordinate.L1, coordinate.L2, speed, true);
+ 
+        }
+
+        public void AddCommandAbsolut()
+        {
+            var speed = Int32.Parse(SpeedAbsolut);
+            Coordinate coordinate = new Coordinate(XAbsolut, YAbsolut, ZAbsolut, L1Absolut, L2Absolut, NameAbsolut);
+            _robot.MoveAbsolut(coordinate, speed, false);
+            Commands = new ObservableCollection<RobotCommand>(_robot.CommandsList);
+            OnPropertyChanged("Commands");
+        }
+
+        public void AddCommandJoint()
+        {
+            var speed = Int32.Parse(SpeedJoint);
+            Coordinate coordinate = new Coordinate(XJoint, YJoint, ZJoint, L1Joint, L2Joint, "InstantMove");
+            _robot.MoveJoint(coordinate.X, coordinate.Y, coordinate.Z, coordinate.L1, coordinate.L2, speed, false);
+        }
+
+        public void SaveCommands()
+        {
+            SaveFileDialog save = new SaveFileDialog();
+            save.DefaultExt = "*.xml";
+            save.Filter = "XML Files|*.xml";
+
+            bool x = (bool)save.ShowDialog();
+            if (x)
+            {
+                _robot.SaveFile(save.FileName);
+            }
+        }
+
+        public void LoadCommands()
+        {
+            OpenFileDialog open = new OpenFileDialog();
+            open.DefaultExt = "*.xml";
+            open.Filter = "XML Files|*.xml";
+            bool success = (bool)open.ShowDialog();
+
+            if(success)
+            {
+                _robot.ReadFile(open.FileName);
+                Commands = new ObservableCollection<RobotCommand>(_robot.CommandsList);
+                OnPropertyChanged("Commands");
+            }
+        }
+
+        public void Where()
+        {
+            Coordinate coordinate = _robot.Where();
+            string[] stringRep = coordinate.GetStringsAsCoordinate();
+            XWhere = stringRep[0];
+            YWhere = stringRep[1];
+            YWhere = stringRep[2];
+            L1Where = stringRep[3];
+            L2Where = stringRep[4];
+
+            OnPropertyChanged("XWhere");
+            OnPropertyChanged("YWhere");
+            OnPropertyChanged("ZWhere");
+            OnPropertyChanged("L1Where");
+            OnPropertyChanged("L2Where");
+        }
+
+        public void AddCoordinateWhereCommand()
+        {
+            Coordinates.Add(new Coordinate(XWhere, YWhere, ZWhere, L1Where, L2Where, "Coordinate " + _coordinateCounter));
+            _coordinateCounter++;
+            OnPropertyChanged("Coordinates");
+        }
         #endregion
     }
 }

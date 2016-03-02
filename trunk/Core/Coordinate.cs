@@ -105,5 +105,12 @@ namespace Core
             string returnString = string.Format("{0},{1},{2},{3},{4}", stringX, stringY, stringZ, stringL1, stringL2);
             return returnString;
         }
+
+        public string[] GetStringsAsCoordinate()
+        {
+            string[] coordinates = new string[5];
+            coordinates = ToString().Split(',');
+            return coordinates;
+        }
     }
 }
