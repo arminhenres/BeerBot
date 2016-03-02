@@ -214,8 +214,8 @@
             </Grid.RowDefinitions>
 
             <Label Grid.Column="0" Grid.Row="0" Content="Coordinates" FontWeight="Bold" VerticalAlignment="Center"/>
-            <Button Grid.Column="1" Grid.Row="0" Content="save" Command="{Binding Save}" Style="{DynamicResource SquareButtonStyle}" Margin="1"/>
-            <Button Grid.Column="2" Grid.Row="0" Content="load" Command="{Binding Load}" Style="{DynamicResource SquareButtonStyle}" Margin="1"/>
+            <Button Grid.Column="1" Grid.Row="0" Content="save" Command="{Binding SaveCoordinatesCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1"/>
+            <Button Grid.Column="2" Grid.Row="0" Content="load" Command="{Binding LoadCoordinatesCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1"/>
             <ListView Grid.Row="1" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="4" BorderBrush="Black" BorderThickness="1" ItemsSource="{Binding Coordinates}" Margin="5,0,10,0">
                 <ListView.View>
                     <GridView>
@@ -229,17 +229,13 @@
                 </ListView.View>
             </ListView>
             <Label Grid.Column="0" Grid.Row="2" Content="Commands" FontWeight="Bold" VerticalAlignment="Center"/>
-            <Button Grid.Column="1" Grid.Row="2" Content="save" Command="{Binding Save}" Style="{DynamicResource SquareButtonStyle}" Margin="1"/>
-            <Button Grid.Column="2" Grid.Row="2" Content="load" Command="{Binding Load}" Style="{DynamicResource SquareButtonStyle}" Margin="1"/>
-            <ListView Grid.Column="0" Grid.Row="3"  Grid.RowSpan="1" Grid.ColumnSpan="4" BorderBrush="Black" BorderThickness="1" ItemsSource="{Binding Coordinates}" Margin="5,0,10,0">
+            <Button Grid.Column="1" Grid.Row="2" Content="save" Command="{Binding SaveCommandsCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1"/>
+            <Button Grid.Column="2" Grid.Row="2" Content="load" Command="{Binding LoadCommandsCommand}" Style="{DynamicResource SquareButtonStyle}" Margin="1"/>
+            <ListView Grid.Column="0" Grid.Row="3"  Grid.RowSpan="1" Grid.ColumnSpan="4" BorderBrush="Black" BorderThickness="1" ItemsSource="{Binding Commands}" Margin="5,0,10,0">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
-                        <GridViewColumn Header="X" DisplayMemberBinding="{Binding X}"/>
-                        <GridViewColumn Header="Y" DisplayMemberBinding="{Binding Y}"/>
-                        <GridViewColumn Header="Z" DisplayMemberBinding="{Binding Z}"/>
-                        <GridViewColumn Header="L1" DisplayMemberBinding="{Binding L1}"/>
-                        <GridViewColumn Header="L2" DisplayMemberBinding="{Binding L2}"/>
+                        <GridViewColumn Header="Befehlstyp" DisplayMemberBinding="{Binding CommandType}"/>
+                        <GridViewColumn Header="Parameter" DisplayMemberBinding="{Binding Parameters}"/>                        
                     </GridView>
                 </ListView.View>
             </ListView>

@@ -41,8 +41,15 @@ namespace HilfsGUI
 			SaveCommandsCommand = new ActionCommand(SaveCommands);
 			LoadCommandsCommand = new ActionCommand(LoadCommands);
 			WhereCommand = new ActionCommand(Where);
-
-		}
+            AddCoordinateWhereCommand = new ActionCommand(AddCoordinateWhere);
+            AddGripCloseCommand = new ActionCommand(AddGripClose);
+            AddGripOpenCommand = new ActionCommand(AddGripOpen);
+            GripCloseInstantCommand = new ActionCommand(GripCloseInstant);
+            GripOpenInstantCommand = new ActionCommand(GripOpenInstant);
+            NestCommand = new ActionCommand(Nest);
+            OriginCommand = new ActionCommand(Origin);
+            ResetCommand = new ActionCommand(Reset);
+        }
 
 		
 
@@ -565,25 +572,42 @@ namespace HilfsGUI
 		
 		public void Origin()
 		{
-			_robot.Origin();
+			_robot.Origin(true);
 		}
 		
 		public void Nest()
 		{
-			_robot.Nest();
+			_robot.Nest(true);
 		}
 		
 		public void Reset()
 		{
 			_robot.Reset();
 		}
-		
-		public void AddGripClose()
-		{
-			_robot.GripClose(false);
-			Commands = new ObservableCollection<RobotCommand>(_robot.CommandsList);
-			OnPropertyChanged("Commands");
-		}
-		#endregion
-	}
+
+        public void AddGripClose()
+        {
+            _robot.GripClose(false);
+            Commands = new ObservableCollection<RobotCommand>(_robot.CommandsList);
+            OnPropertyChanged("Commands");
+        }
+
+        public void AddGripOpen()
+        {
+            _robot.GripOpen(false);
+            Commands = new ObservableCollection<RobotCommand>(_robot.CommandsList);
+            OnPropertyChanged("Commands");
+        }
+
+        public void GripCloseInstant()
+        {
+            _robot.GripClose(true);
+        }
+
+        public void GripOpenInstant()
+        {
+            _robot.GripClose(true);
+        }
+        #endregion
+    }
 }
