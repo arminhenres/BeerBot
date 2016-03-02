@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{68550694-E10E-493D-AE1A-2F2EFA1F8684}"
 EndProject
@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ressources", "Ressources", 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HilfsGUI", "HilfsGUI\HilfsGUI.csproj", "{721FBF84-48A8-4349-9732-F867CF4E7DA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplication1", "WpfApplication1\WpfApplication1.csproj", "{9B043792-6F8E-4DBE-B879-ACFE2C0C2BDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{721FBF84-48A8-4349-9732-F867CF4E7DA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{721FBF84-48A8-4349-9732-F867CF4E7DA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{721FBF84-48A8-4349-9732-F867CF4E7DA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B043792-6F8E-4DBE-B879-ACFE2C0C2BDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B043792-6F8E-4DBE-B879-ACFE2C0C2BDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B043792-6F8E-4DBE-B879-ACFE2C0C2BDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B043792-6F8E-4DBE-B879-ACFE2C0C2BDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

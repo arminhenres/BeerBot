@@ -12,8 +12,8 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -23,18 +23,40 @@
             <Button Content="Save" Command="{Binding SaveCoordinatesCommand}"/>
             <Button Content="Load" Command="{Binding LoadCoordinatesCommand}"/>
         </StackPanel>
-        <StackPanel Height="30" Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center">
-            <Controls:NumericUpDown Value="{Binding X}"/>
-            <Controls:NumericUpDown Value="{Binding Y}"/>
-            <Controls:NumericUpDown Value="{Binding Z}"/>
-            <Controls:NumericUpDown Value="{Binding L1}"/>
-            <Controls:NumericUpDown Value="{Binding L2}"/>
+        <GroupBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Header="Move Absolut">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Height="30" Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center">
+            <Controls:NumericUpDown Value="{Binding XAbsolut}"/>
+                    <Controls:NumericUpDown Value="{Binding YAbsolut}"/>
+                    <Controls:NumericUpDown Value="{Binding ZAbsolut}"/>
+                    <Controls:NumericUpDown Value="{Binding L1Absolut}"/>
+                    <Controls:NumericUpDown Value="{Binding L2Absolut}"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Center">
             <Button Content="Save Coordinate" Command="{Binding AddCoordinateCommand}"/>
-            <Button Content="Button 2" Command="{Binding SaveCoordinatesCommand}"/>
-            <Button Content="Button 3" Command="{Binding LoadCoordinatesCommand}"/>
+            <Button Content="Save Command" Command="{Binding SaveCoordinatesCommand}"/>
+            <Button Content="Reset" Command="{Binding LoadCoordinatesCommand}"/>
+            <Button Content="Move Instant" Command="{Binding LoadCoordinatesCommand}"/>
         </StackPanel>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Header="Move Joint" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Height="30" Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center">
+                    <Controls:NumericUpDown Value="{Binding XJoint}"/>
+                    <Controls:NumericUpDown Value="{Binding YJoint}"/>
+                    <Controls:NumericUpDown Value="{Binding ZJoint}"/>
+                    <Controls:NumericUpDown Value="{Binding L1Joint}"/>
+                    <Controls:NumericUpDown Value="{Binding L2Joint}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Center">
+                    <Button Content="Save Command" Command="{Binding AddCoordinateCommand}"/>
+                    <Button Content="Reset" Command="{Binding SaveCoordinatesCommand}"/>
+                    <Button Content="Move Instant" Command="{Binding LoadCoordinatesCommand}"/>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+        
         <ListView Grid.Row="1" Grid.Column="3" Grid.RowSpan="1" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="1" ItemsSource="{Binding Coordinates}">
             <ListView.View>
                 <GridView>
@@ -47,5 +69,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        
     </Grid>
 </Controls:MetroWindow>

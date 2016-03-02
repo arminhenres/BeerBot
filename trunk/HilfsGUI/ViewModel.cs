@@ -24,6 +24,7 @@ namespace HilfsGUI
             AddCoordinateCommand = new ActionCommand(AddCoordinate);
             SaveCoordinatesCommand = new ActionCommand(SaveCoordinates);
             LoadCoordinatesCommand = new ActionCommand(LoadCoordinates);
+            ResetAbsolutCommand = new ActionCommand(ResetAbsolut);
         }
 
         
@@ -35,27 +36,61 @@ namespace HilfsGUI
             set;
         }
 
-        public string X
+        public string XAbsolut
         {
             get;
             set;
         }
-        public string Y
+
+        public string YAbsolut
         {
             get;
             set;
         }
-        public string Z
+
+        public string ZAbsolut
         {
             get;
             set;
         }
-        public string L1
+
+        public string L1Absolut
         {
             get;
             set;
         }
-        public string L2
+
+        public string L2Absolut
+        {
+            get;
+            set;
+        }
+
+        public string XJoint
+        {
+            get;
+            set;
+        }
+
+        public string YJoint
+        {
+            get;
+            set;
+        }
+
+        public string ZJoint
+        {
+            get;
+            set;
+        }
+
+        public string L1Joint
+        {
+            get;
+            set;
+        }
+
+        public string L2Joint
         {
             get;
             set;
@@ -80,34 +115,70 @@ namespace HilfsGUI
             get;
             set;
         }
+
+        public ActionCommand AddCommandJointCommand
+        {
+            get;
+            set;
+        }
+        public ActionCommand AddCommandAbsolutCommand
+        {
+            get;
+            set;
+        }
+
+
+        public ActionCommand ResetAbsolutCommand
+        {
+            get;
+            set;
+        }
+
+        public ActionCommand ResetJointCommand
+        {
+            get;
+            set;
+        }
+
+        public ActionCommand MoveInstantJointCommand
+        {
+            get;
+            set;
+        }
+
+        public ActionCommand MoveInstantAbsolutCommand
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Methods
         private void AddCoordinate()
         {
-            if (X == null)
+            if (XAbsolut == null)
             {
-                X = "0";
+                XAbsolut = "0";
             }
 
-            if (Y == null)
+            if (YAbsolut == null)
             {
-                Y = "0";
+                YAbsolut = "0";
             }
 
-            if (Z == null)
+            if (ZAbsolut == null)
             {
-                Z = "0";
+                ZAbsolut = "0";
             }
 
-            if (L1 == null)
+            if (L1Absolut == null)
             {
-                L1 = "0";
+                L1Absolut = "0";
             }
 
-            if (L2 == null)
+            if (L2Absolut == null)
             {
-                L2 = "0";
+                L2Absolut = "0";
             }
 
 
@@ -115,7 +186,7 @@ namespace HilfsGUI
             {
                 i++;
             }
-            Coordinates.Add(new Coordinate(X, Y, Z, L1, L2, "#"+i.ToString()));
+            Coordinates.Add(new Coordinate(XAbsolut, YAbsolut, ZAbsolut, L1Absolut, L2Absolut, "#"+i.ToString()));
             OnPropertyChanged("Coordinates");
             
         }
@@ -176,6 +247,24 @@ namespace HilfsGUI
                     Coordinates.Add(new Coordinate(command.Attribute("X").Value, command.Attribute("Y").Value, command.Attribute("Z").Value, command.Attribute("L1").Value, command.Attribute("L2").Value, command.Attribute("Name").Value));
                 }
             }
+        }
+
+        public void ResetAbsolut()
+        {
+            XAbsolut = "0";
+            YAbsolut = "0";
+            ZAbsolut = "0";
+            L1Absolut = "0";
+            L2Absolut = "0";
+        }
+
+        public void ResetJoint()
+        {
+            XJoint = "0";
+            YJoint = "0";
+            ZJoint = "0";
+            L1Joint = "0";
+            L2Joint = "0";
         }
 
         #endregion
