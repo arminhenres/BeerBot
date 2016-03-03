@@ -14,7 +14,7 @@ namespace RVM1Testing
     "A userId of null was inappropriately allowed.")]
         public void Pipapo()
         {
-            _robot.Init();
+            _robot.Init(); 
         }
     }
 }
