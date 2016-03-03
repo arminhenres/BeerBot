@@ -1,2 +1,2 @@
 language: csharp
-solution: BeerBot.sln
+solution: trunk/BeerBot.sln
