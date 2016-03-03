@@ -18,7 +18,7 @@ namespace HilfsGUI
 		{
 			
 			_coordinateCounter = 0;
-			_robot = new MoveMasterRobot();
+			//_robot = new MoveMasterRobot();
 
 			Coordinates = new ObservableCollection<Coordinate>();
 			Commands = new ObservableCollection<RobotCommand>();
@@ -45,7 +45,10 @@ namespace HilfsGUI
             ResetCommand = new ActionCommand(Reset);
         }
 
-		
+		public GeneralViewModel(MoveMasterRobot robot) :this()
+        {
+            _robot = robot;
+        }
 
 		#region Properties
 		public ObservableCollection<Coordinate> Coordinates
