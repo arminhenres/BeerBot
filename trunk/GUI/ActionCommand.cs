@@ -18,7 +18,7 @@ namespace GUI
 
         public ActionCommand(Action action)
         {
-            _action = action;
+            _action = action; 
         }
         public bool CanExecute(object parameter)
         {
