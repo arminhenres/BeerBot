@@ -48,7 +48,11 @@ namespace GUI
             DeleteCoordinateCommand = new ActionCommand(DeleteCoordinate);
             DeleteCommandCommand = new ActionCommand(DeleteCommand);
             LoadCoordinatesToCommand = new ActionCommand(LoadCoordinatesTo);
+            MoveCommandUpCommand = new ActionCommand(MoveCommandUp);
+            MoveCommandDownCommand = new ActionCommand(MoveCommandDown);
         }
+
+        
 
         public GeneralViewModel(MoveMasterRobot robot)
             : this()
@@ -529,6 +533,43 @@ namespace GUI
             get;
             set;
         }
+
+        public ActionCommand MoveCommandUpCommand
+        {
+            get;
+            set;
+        }
+
+        public ActionCommand MoveCommandDownCommand
+        {
+            get;
+            set;
+        }
+
+        private void MoveCommandDown()
+        {
+            int index = Commands.IndexOf(SelectedCommand);
+
+            RobotCommand auslagerung = _robot.CommandsList[index];
+            _robot.CommandsList[index] = _robot.CommandsList[index+1];
+            _robot.CommandsList[index+1] = auslagerung;
+           
+            Commands = new ObservableCollection<RobotCommand>(_robot.CommandsList);
+            OnPropertyChanged("Commands");
+        }
+
+        private void MoveCommandUp()
+        {
+            int index = Commands.IndexOf(SelectedCommand);
+
+            RobotCommand auslagerung = _robot.CommandsList[index];
+            _robot.CommandsList[index] = _robot.CommandsList[index -1];
+            _robot.CommandsList[index -1] = auslagerung;
+
+            Commands = new ObservableCollection<RobotCommand>(_robot.CommandsList);
+            OnPropertyChanged("Commands");
+        }
+
 		#endregion
 
 		#region Methods
