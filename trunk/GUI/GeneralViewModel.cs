@@ -50,6 +50,7 @@ namespace GUI
             LoadCoordinatesToCommand = new ActionCommand(LoadCoordinatesTo);
             MoveCommandUpCommand = new ActionCommand(MoveCommandUp);
             MoveCommandDownCommand = new ActionCommand(MoveCommandDown);
+            ExecuteCommandsCommand = new ActionCommand(ExecuteCommands);
         }
 
         
@@ -544,6 +545,17 @@ namespace GUI
         {
             get;
             set;
+        }
+
+        public ActionCommand ExecuteCommandsCommand
+        {
+            get;
+            set;
+        }
+
+        private void ExecuteCommands()
+        {
+            _robot.ExecuteCommands();
         }
 
         private void MoveCommandDown()
