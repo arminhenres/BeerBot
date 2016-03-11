@@ -1,10 +1,12 @@
-﻿using RobotControl;
+﻿using MahApps.Metro.Controls.Dialogs;
+using RobotControl;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -97,18 +99,18 @@ namespace GUI
             }
             set
             {
-                if (!value)
-                {
-                    _robot.Deinit();
-                }
-                else
-                {
-                    _robot.Init();
-                    
-                }
-                _isInitialized = _robot.IsInitialized;
-                _generalViewModel.IsInitialized = _isInitialized;
+                    if (!value)
+                    {
+                        _robot.Deinit();
+                    }
+                    else
+                    {
+                        Init();
+                    }
+                    _isInitialized = _robot.IsInitialized;
+                    _generalViewModel.IsInitialized = _isInitialized;
             }
+                
         }
 
         public ObservableCollection<string> Ports
@@ -223,5 +225,23 @@ namespace GUI
             set;
         }
                
+        private async void Init()
+        {
+            ExceptionDispatchInfo capturedException = null;
+            try
+            {
+                _robot.Init(Port, Bits, Baud, "LF", ParityBit, StopBit, true, Handshakee);
+            }
+            catch(Exception ex)
+            {
+                capturedException = ExceptionDispatchInfo.Capture(ex);
+            }
+
+            if(capturedException != null)
+            {
+                MessageDialogResult result = await MessageService.ShowMessage("Verbindunsfehler!", "Bitte Settings überprüfen!", MessageDialogStyle.Affirmative).ConfigureAwait(false);
+            }
+            
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace Core
 {
     public interface IRobot
     {
-        void Init();
+        void Init(string portName, int dataBits, int baudRate, string newLine, Parity parity, StopBits stopBits, bool rtsEnable, Handshake handshake);
 
         void Deinit();
 

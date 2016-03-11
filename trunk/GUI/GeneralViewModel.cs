@@ -1,8 +1,12 @@
 ﻿using Core;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Win32;
 using RobotControl;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -818,8 +822,9 @@ namespace GUI
             _robot.GripClose(true);
         }
 
-        private void GripOpenInstant()
+        private async void GripOpenInstant()
         {
+            MessageDialogResult result = await MessageService.ShowMessage("ACHTUNG!","Achtung, Greifer öffnet!", MessageDialogStyle.Affirmative).ConfigureAwait(false);
             _robot.GripOpen(true);
         }
 
@@ -868,9 +873,13 @@ namespace GUI
         {
             int index = Commands.IndexOf(SelectedCommand);
 
-            RobotCommand auslagerung = _robot.CommandsList[index];
-            _robot.CommandsList[index] = _robot.CommandsList[index + 1];
-            _robot.CommandsList[index + 1] = auslagerung;
+            if(Commands.Count > 1 && index < Commands.Count-1)
+            {
+                RobotCommand auslagerung = _robot.CommandsList[index];
+                _robot.CommandsList[index] = _robot.CommandsList[index + 1];
+                _robot.CommandsList[index + 1] = auslagerung;
+            }
+            
 
             Commands = new ObservableCollection<RobotCommand>(_robot.CommandsList);
             OnPropertyChanged("Commands");
@@ -880,13 +889,19 @@ namespace GUI
         {
             int index = Commands.IndexOf(SelectedCommand);
 
+            if(Commands.Count > 1 && index > 0)
+            {
             RobotCommand auslagerung = _robot.CommandsList[index];
             _robot.CommandsList[index] = _robot.CommandsList[index - 1];
             _robot.CommandsList[index - 1] = auslagerung;
+            }
+            
 
             Commands = new ObservableCollection<RobotCommand>(_robot.CommandsList);
             OnPropertyChanged("Commands");
         }
+
+        
         #endregion
     }
 }

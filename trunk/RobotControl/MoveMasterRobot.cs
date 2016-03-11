@@ -33,15 +33,6 @@ namespace RobotControl
         {
             _isBusy = false;
             _isInitialized = false;
-            _connection = new SerialPort();
-            _connection.PortName = "COM1";
-            _connection.DataBits = 7;
-            _connection.BaudRate = 9600;
-            _connection.NewLine = "LF";
-            _connection.Parity = Parity.Even;
-            _connection.StopBits = StopBits.Two;
-            _connection.RtsEnable = true;
-            _connection.Handshake = Handshake.RequestToSend;
             commands = new List<RobotCommand>();
 
         }
@@ -91,8 +82,18 @@ namespace RobotControl
         /// <summary>
         /// Initializes the Robot
         /// </summary>
-        public void Init()
+        public void Init(string portName, int dataBits, int baudRate, string newLine, Parity parity, StopBits stopBits, bool rtsEnable, Handshake handshake)
         {
+            _connection = new SerialPort();
+            _connection.PortName = portName;
+            _connection.DataBits = dataBits;
+            _connection.BaudRate = baudRate;
+            _connection.NewLine = "LF";
+            _connection.Parity = parity;
+            _connection.StopBits = stopBits;
+            _connection.RtsEnable = true;
+            _connection.Handshake = handshake;
+
             _connection.DataReceived += new SerialDataReceivedEventHandler(this.OnDatateReceived);
             if (!_connection.IsOpen)
             {
