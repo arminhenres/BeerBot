@@ -167,6 +167,11 @@ namespace RobotControl
             SendMessage(command, instant);
         }
 
+        public void Timeout(string millis)
+        {
+            RobotCommand command = new RobotCommand("TI", millis);
+            SendMessage(command, false);
+        }
         /// <summary>
         /// Moves to Nest Position
         /// </summary>

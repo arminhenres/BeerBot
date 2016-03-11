@@ -51,6 +51,7 @@ namespace GUI
             MoveCommandUpCommand = new ActionCommand(MoveCommandUp);
             MoveCommandDownCommand = new ActionCommand(MoveCommandDown);
             ExecuteCommandsCommand = new ActionCommand(ExecuteCommands);
+            SetTimeoutCommand = new ActionCommand(SetTimeout);
         }
 
         
@@ -86,6 +87,18 @@ namespace GUI
 			get;
 			set;
 		}
+
+        public ActionCommand SetTimeoutCommand
+        {
+            get;
+            set;
+        }
+
+        public string Timeout
+        {
+            get;
+            set;
+        }
 
 		#region Absolutkoordinaten
 		private string _xAbsolut;
@@ -855,6 +868,13 @@ namespace GUI
             OnPropertyChanged("ZAbsolut");
             OnPropertyChanged("L1Absolut");
             OnPropertyChanged("L2Absolut");
+        }
+
+        private void SetTimeout()
+        {
+            _robot.Timeout(Timeout);
+            Commands = new ObservableCollection<RobotCommand>(_robot.CommandsList);
+            OnPropertyChanged("Commands");
         }
         #endregion
     }

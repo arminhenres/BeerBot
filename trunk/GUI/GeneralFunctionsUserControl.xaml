@@ -206,6 +206,15 @@
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
+            
+            <GroupBox Header="Timer">
+                <StackPanel>
+                    <Button Content="Set Timeout" Margin="1" Command="{Binding SetTimeoutCommand}"/>
+            
+                    <TextBox Text="{Binding Timeout}"/>
+                </StackPanel>
+                
+            </GroupBox>
         </StackPanel>
         <Grid Grid.Column="1">
             <Grid.ColumnDefinitions>
