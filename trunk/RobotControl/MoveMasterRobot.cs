@@ -15,8 +15,6 @@ namespace RobotControl
     public class MoveMasterRobot : IRobot
     {
         #region Fields
-        bool sent = false;
-
         private SerialPort _connection;
 
         private ManualResetEvent _mre = new ManualResetEvent(false);
@@ -55,6 +53,14 @@ namespace RobotControl
             get
             {
                 return commands;
+            }
+        }
+
+        public bool IsInitialized
+        {
+            get
+            {
+                return _isInitialized;
             }
         }
         #endregion

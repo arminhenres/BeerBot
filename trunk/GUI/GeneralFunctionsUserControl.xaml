@@ -14,7 +14,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
+    <Grid IsEnabled="{Binding IsInitialized}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
@@ -157,7 +157,7 @@
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="Buttons">
+            <GroupBox Header="General Functions">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 
@@ -208,10 +208,9 @@
             </GroupBox>
             
             <GroupBox Header="Timer">
-                <StackPanel>
-                    <Button Content="Set Timeout" Margin="1" Command="{Binding SetTimeoutCommand}"/>
-            
-                    <TextBox Text="{Binding Timeout}"/>
+                <StackPanel Orientation="Horizontal">
+                    <Controls:NumericUpDown Value="{Binding Timeout}" Minimum="0" Maximum="100"/>
+                    <Button Content="Set Timeout" Margin="1" Command="{Binding SetTimeoutCommand}" Style="{DynamicResource SquareButtonStyle}"/>
                 </StackPanel>
                 
             </GroupBox>

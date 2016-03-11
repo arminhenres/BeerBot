@@ -104,8 +104,10 @@ namespace GUI
                 else
                 {
                     _robot.Init();
+                    
                 }
-                _isInitialized = value;
+                _isInitialized = _robot.IsInitialized;
+                _generalViewModel.IsInitialized = _isInitialized;
             }
         }
 

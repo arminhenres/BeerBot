@@ -20,8 +20,7 @@ namespace GUI
 		{
 			
 			_coordinateCounter = 0;
-			//_robot = new MoveMasterRobot();
-
+			
 			Coordinates = new ObservableCollection<Coordinate>();
 			Commands = new ObservableCollection<RobotCommand>();
 			
@@ -64,6 +63,19 @@ namespace GUI
         #endregion
         
 		#region Properties
+        private bool _isInitialized;
+        public bool IsInitialized
+        {
+            get
+            {
+                return _isInitialized;
+            }
+            set
+            {
+                _isInitialized = value;
+                OnPropertyChanged("IsInitialized");
+            }
+        }
 		public ObservableCollection<Coordinate> Coordinates
 		{
 			get;
@@ -427,7 +439,7 @@ namespace GUI
 			get;
 			set;
 		}
-
+                
 		public ActionCommand AddCommandJointCommand
 		{
 			get;
@@ -565,37 +577,7 @@ namespace GUI
             get;
             set;
         }
-
-        private void ExecuteCommands()
-        {
-            _robot.ExecuteCommands();
-        }
-
-        private void MoveCommandDown()
-        {
-            int index = Commands.IndexOf(SelectedCommand);
-
-            RobotCommand auslagerung = _robot.CommandsList[index];
-            _robot.CommandsList[index] = _robot.CommandsList[index+1];
-            _robot.CommandsList[index+1] = auslagerung;
-           
-            Commands = new ObservableCollection<RobotCommand>(_robot.CommandsList);
-            OnPropertyChanged("Commands");
-        }
-
-        private void MoveCommandUp()
-        {
-            int index = Commands.IndexOf(SelectedCommand);
-
-            RobotCommand auslagerung = _robot.CommandsList[index];
-            _robot.CommandsList[index] = _robot.CommandsList[index -1];
-            _robot.CommandsList[index -1] = auslagerung;
-
-            Commands = new ObservableCollection<RobotCommand>(_robot.CommandsList);
-            OnPropertyChanged("Commands");
-        }
-
-		#endregion
+        #endregion
 
 		#region Methods
 		private void AddCoordinate()
@@ -631,7 +613,7 @@ namespace GUI
 			
 		}
 
-		public void SaveCoordinates()
+		private void SaveCoordinates()
 		{
 			SaveFileDialog save = new SaveFileDialog();
 			save.DefaultExt = "*.xml";
@@ -669,7 +651,7 @@ namespace GUI
 			}
 		}
 
-		public void LoadCoordinates()
+        private void LoadCoordinates()
 		{
 			OpenFileDialog open = new OpenFileDialog();
 			open.DefaultExt = "*.xml";
@@ -689,7 +671,7 @@ namespace GUI
 			}
 		}
 
-		public void ResetAbsolut()
+        private void ResetAbsolut()
 		{
 			XAbsolut = "0";
 			YAbsolut = "0";
@@ -703,7 +685,7 @@ namespace GUI
 			OnPropertyChanged("L2Absolut");
 		}
 
-		public void ResetJoint()
+        private void ResetJoint()
 		{
 			XJoint = "0";
 			YJoint = "0";
@@ -717,14 +699,14 @@ namespace GUI
 			OnPropertyChanged("L2Joint");
 		}
 
-		public void MoveInstantAbsolut()
+        private void MoveInstantAbsolut()
 		{
 			var speed = Int32.Parse(SpeedAbsolut);
 			Coordinate coordinate = new Coordinate(XAbsolut, YAbsolut, ZAbsolut, L1Absolut, L2Absolut, "InstantMove");
 			_robot.MoveAbsolut(coordinate, speed, true);
 		}
 
-		public void MoveInstantJoint()
+        private void MoveInstantJoint()
 		{
 			var speed = Int32.Parse(SpeedJoint);
 			Coordinate coordinate = new Coordinate(XJoint, YJoint, ZJoint, L1Joint, L2Joint, "InstantMove");
@@ -732,7 +714,7 @@ namespace GUI
 			
 		}
 
-		public void AddCommandAbsolut()
+        private void AddCommandAbsolut()
 		{
 			var speed = Int32.Parse(SpeedAbsolut);
 			Coordinate coordinate = new Coordinate(XAbsolut, YAbsolut, ZAbsolut, L1Absolut, L2Absolut, NameAbsolut);
@@ -741,7 +723,7 @@ namespace GUI
 			OnPropertyChanged("Commands");
 		}
 
-		public void AddCommandJoint()
+        private void AddCommandJoint()
 		{
 			var speed = Int32.Parse(SpeedJoint);
 			Coordinate coordinate = new Coordinate(XJoint, YJoint, ZJoint, L1Joint, L2Joint, "InstantMove");
@@ -750,7 +732,7 @@ namespace GUI
             OnPropertyChanged("Commands");
 		}
 
-		public void SaveCommands()
+        private void SaveCommands()
 		{
 			SaveFileDialog save = new SaveFileDialog();
 			save.DefaultExt = "*.xml";
@@ -763,7 +745,7 @@ namespace GUI
 			}
 		}
 
-		public void LoadCommands()
+        private void LoadCommands()
 		{
 			OpenFileDialog open = new OpenFileDialog();
 			open.DefaultExt = "*.xml";
@@ -778,7 +760,7 @@ namespace GUI
 			}
 		}
 
-		public void Where()
+        private void Where()
 		{
 			Coordinate coordinate = _robot.Where();
 			string[] stringRep = coordinate.GetStringsAsCoordinate();
@@ -795,66 +777,66 @@ namespace GUI
 			OnPropertyChanged("L2Where");
 		}
 
-		public void AddCoordinateWhere()
+        private void AddCoordinateWhere()
 		{
 			Coordinates.Add(new Coordinate(XWhere, YWhere, ZWhere, L1Where, L2Where, "Coordinate " + _coordinateCounter));
 			_coordinateCounter++;
 			OnPropertyChanged("Coordinates");
 		}
-		
-		public void Origin()
+
+        private void Origin()
 		{
 			_robot.Origin(true);
 		}
-		
-		public void Nest()
+
+        private void Nest()
 		{
 			_robot.Nest(true);
 		}
-		
-		public void Reset()
+
+        private void Reset()
 		{
 			_robot.Reset();
 		}
 
-        public void AddGripClose()
+        private void AddGripClose()
         {
             _robot.GripClose(false);
             Commands = new ObservableCollection<RobotCommand>(_robot.CommandsList);
             OnPropertyChanged("Commands");
         }
 
-        public void AddGripOpen()
+        private void AddGripOpen()
         {
             _robot.GripOpen(false);
             Commands = new ObservableCollection<RobotCommand>(_robot.CommandsList);
             OnPropertyChanged("Commands");
         }
 
-        public void GripCloseInstant()
+        private void GripCloseInstant()
         {
             _robot.GripClose(true);
         }
 
-        public void GripOpenInstant()
+        private void GripOpenInstant()
         {
             _robot.GripOpen(true);
         }
 
-        public void DeleteCoordinate()
+        private void DeleteCoordinate()
         {
             Coordinates.Remove(SelectedCoordinate);
             OnPropertyChanged("Coordinates");
         }
 
-        public void DeleteCommand()
+        private void DeleteCommand()
         {
             _robot.CommandsList.Remove(SelectedCommand);
             Commands = new ObservableCollection<RobotCommand>(_robot.CommandsList);
             OnPropertyChanged("Commands");
         }
 
-        public void LoadCoordinatesTo()
+        private void LoadCoordinatesTo()
         {
             var coordinates = SelectedCoordinate.GetStringsAsCoordinate();
             XAbsolut = coordinates[0];
@@ -873,6 +855,35 @@ namespace GUI
         private void SetTimeout()
         {
             _robot.Timeout(Timeout);
+            Commands = new ObservableCollection<RobotCommand>(_robot.CommandsList);
+            OnPropertyChanged("Commands");
+        }
+
+        private void ExecuteCommands()
+        {
+            _robot.ExecuteCommands();
+        }
+
+        private void MoveCommandDown()
+        {
+            int index = Commands.IndexOf(SelectedCommand);
+
+            RobotCommand auslagerung = _robot.CommandsList[index];
+            _robot.CommandsList[index] = _robot.CommandsList[index + 1];
+            _robot.CommandsList[index + 1] = auslagerung;
+
+            Commands = new ObservableCollection<RobotCommand>(_robot.CommandsList);
+            OnPropertyChanged("Commands");
+        }
+
+        private void MoveCommandUp()
+        {
+            int index = Commands.IndexOf(SelectedCommand);
+
+            RobotCommand auslagerung = _robot.CommandsList[index];
+            _robot.CommandsList[index] = _robot.CommandsList[index - 1];
+            _robot.CommandsList[index - 1] = auslagerung;
+
             Commands = new ObservableCollection<RobotCommand>(_robot.CommandsList);
             OnPropertyChanged("Commands");
         }

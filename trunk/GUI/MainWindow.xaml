@@ -5,7 +5,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:serial="clr-namespace:System.IO.Ports;assembly=System"
         xmlns:this="clr-namespace:GUI"
-        Title="RV-M1 Ansteuerung" Height="800" Width="1300" BorderBrush="#33119EDA" BorderThickness="1" ResizeMode="NoResize" >
+        Title="RV-M1 Ansteuerung" Height="850" Width="1300" BorderBrush="#33119EDA" BorderThickness="1" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ObjectDataProvider x:Key="ParityEnum"
                             MethodName="GetValues" 
