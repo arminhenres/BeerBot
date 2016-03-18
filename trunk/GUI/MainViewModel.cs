@@ -31,7 +31,7 @@ namespace GUI
             SaveSettingss(Port, Baud, ParityBit, Handshakee, Bits, StopBit);
         }
 
-        private void SaveSettingss(string port, int baud, Parity parity, Handshake handshake, int dataBits, StopBits stopBits)
+        private async void SaveSettingss(string port, int baud, Parity parity, Handshake handshake, int dataBits, StopBits stopBits)
         {
             writing = true;
             XmlWriterSettings settings = new XmlWriterSettings { Indent = true, NewLineOnAttributes = true };
@@ -52,6 +52,7 @@ namespace GUI
             writer.Flush();
             writer.Close();
             writing = false;
+            MessageDialogResult result = await MessageService.ShowMessage("Gespeichert!", "Settings wurden gespeichert!", MessageDialogStyle.Affirmative).ConfigureAwait(false);
         }
 
         bool writing = false;
@@ -70,7 +71,7 @@ namespace GUI
 
                 reader.ReadToFollowing("Baudrate");
                 var baud = reader.ReadElementContentAsString();
-                Convert.ToInt32(baud);
+                Baud = Convert.ToInt32(baud);
 
                 reader.ReadToFollowing("Parity");
                 var parity = reader.ReadElementContentAsString();
