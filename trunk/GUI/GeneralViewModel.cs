@@ -110,10 +110,21 @@ namespace GUI
             set;
         }
 
+        private string _timeout;
         public string Timeout
         {
-            get;
-            set;
+            get
+            {
+                if (_timeout == null)
+                {
+                    _timeout = "0";
+                }
+                return _timeout;
+            }
+            set
+            {
+                _timeout = value;
+            }
         }
 
 		#region Absolutkoordinaten

@@ -33,6 +33,7 @@ namespace GUI
 
         private void SaveSettingss(string port, int baud, Parity parity, Handshake handshake, int dataBits, StopBits stopBits)
         {
+            writing = true;
             XmlWriterSettings settings = new XmlWriterSettings { Indent = true, NewLineOnAttributes = true };
             XmlWriter writer = XmlWriter.Create("Settings.xml", settings);
 
@@ -49,11 +50,17 @@ namespace GUI
             writer.WriteEndElement();
             writer.WriteEndDocument();
             writer.Flush();
+            writer.Close();
+            writing = false;
         }
+
+        bool writing = false;
         private void ReadSettings()
         {
             if (File.Exists("Settings.xml"))
             {
+                if(!writing)
+                {                
                 XmlReader reader = XmlReader.Create("Settings.xml");
                 Dictionary<string, string> settings = new Dictionary<string, string>();
 
@@ -81,10 +88,20 @@ namespace GUI
                 var stopbits = reader.ReadElementContentAsString();
                 StopBit = (StopBits)System.Enum.Parse(typeof(StopBits), stopbits);
                 reader.Close();
+                }
+                else
+                {
+                    ReadSettings();
+                }
             }
             else
             {
+                Object locker = new Object();
+
+                
                 SaveSettingss("", 300, Parity.None, Handshake.None, 5, StopBits.None);
+                
+                
                 ReadSettings();
             }
 
