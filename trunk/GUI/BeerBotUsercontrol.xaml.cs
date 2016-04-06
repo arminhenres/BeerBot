@@ -25,24 +25,7 @@ namespace GUI
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Button1.Background = Brushes.YellowGreen;
-            Bier_Start.Visibility = Visibility.Visible;
-        }
-
-        private void Bier_Start_Click(object sender, RoutedEventArgs e)
-        {
-            ProgressBar.Visibility = Visibility.Visible;
-            LifeTicker.Visibility = Visibility.Visible;
-           
-            
-        }
-
-        private void ButtonNot_Click (object sender, RoutedEventArgs e)
-        {
-            
-        }
+       
 
     }
 }

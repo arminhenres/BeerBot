@@ -64,6 +64,7 @@
     <Compile Include="BeerBotUsercontrol.xaml.cs">
       <DependentUpon>BeerBotUsercontrol.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BeerBotViewModel.cs" />
     <Compile Include="GeneralFunctionsUserControl.xaml.cs">
       <DependentUpon>GeneralFunctionsUserControl.xaml</DependentUpon>
     </Compile>
