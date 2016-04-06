@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Coordinates>
+  <Coordinate Name="Greifer 90°" X="589,0" Y="0,0" Z="300,0" L1="0,0" L2="0,0" />
+  <Coordinate Name="Arm über Flasche" X="490,9" Y="195,2" Z="305,8" L1="0,9" L2="83,8" />
+  <Coordinate Name="Flasche Greifen" X="490,9" Y="195,2" Z="120,8" L1="0,9" L2="83,8" />
+  <Coordinate Name="Kurz vor Einschenken groß" X="508,4" Y="40" Z="190" L1="0,0" L2="15" />
+  <Coordinate Name="Einschenken Ende" X="508,4" Y="40" Z="275" L1="0,0" L2="-26" />
+  <Coordinate Name="Einschenken #1" X="508,4" Y="40" Z="200" L1="0,0" L2="8" />
+  <Coordinate Name="Einschenken #2" X="508,4" Y="40" Z="210" L1="0,0" L2="3" />
+  <Coordinate Name="Einschenken #3" X="508,4" Y="40" Z="220" L1="0,0" L2="-2" />
+  <Coordinate Name="Einschenken #4" X="508,4" Y="40" Z="230" L1="0,0" L2="-7" />
+  <Coordinate Name="Einschenken #5" X="508,4" Y="40" Z="240" L1="0,0" L2="-11" />
+  <Coordinate Name="Aufstellen" X="508,4" Y="-140" Z="380" L1="0,0" L2="-45" />
+</Coordinates>

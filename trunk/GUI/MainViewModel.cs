@@ -18,12 +18,14 @@ namespace GUI
 
         GeneralViewModel _generalViewModel;
         private MoveMasterRobot _robot;
+        bool initialization = true;
         public MainViewModel()
         {
             _robot = new MoveMasterRobot();
             SaveSettings = new ActionCommand(SaveSettingsCommand);
             ReadSettings();
             _generalViewModel = new GeneralViewModel(_robot);
+            initialization = false;
         }
 
         private void SaveSettingsCommand()
@@ -52,7 +54,11 @@ namespace GUI
             writer.Flush();
             writer.Close();
             writing = false;
-            MessageDialogResult result = await MessageService.ShowMessage("Gespeichert!", "Settings wurden gespeichert!", MessageDialogStyle.Affirmative).ConfigureAwait(false);
+            if(!initialization)
+            {
+                MessageDialogResult result = await MessageService.ShowMessage("Gespeichert!", "Settings wurden gespeichert!", MessageDialogStyle.Affirmative).ConfigureAwait(false);
+            }
+            
         }
 
         bool writing = false;

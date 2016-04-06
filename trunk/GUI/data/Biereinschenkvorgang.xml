@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Pipapo>
+  <Befehl Command="SP" Parameters="5" />
+  <Befehl Command="MP" Parameters="490.9,195.2,305.8,0.9,83.8" />
+  <Befehl Command="MP" Parameters="490.9,195.2,120.8,0.9,83.8" />
+  <Befehl Command="GC" Parameters="" />
+  <Befehl Command="MP" Parameters="508.4,40,190,0.0,15" />
+  <Befehl Command="SP" Parameters="1" />
+  <Befehl Command="MP" Parameters="508.4,40,200,0.0,8" />
+  <Befehl Command="TI" Parameters="15" />
+  <Befehl Command="MP" Parameters="508.4,40,210,0.0,3" />
+  <Befehl Command="TI" Parameters="15" />
+  <Befehl Command="MP" Parameters="508.4,40,220,0.0,-2" />
+  <Befehl Command="TI" Parameters="15" />
+  <Befehl Command="MP" Parameters="508.4,40,230,0.0,-7" />
+  <Befehl Command="TI" Parameters="15" />
+  <Befehl Command="MP" Parameters="508.4,40,240,0.0,-11" />
+  <Befehl Command="SP" Parameters="2" />
+  <Befehl Command="MP" Parameters="508.4,-140,380,0.0,-45" />
+</Pipapo>
