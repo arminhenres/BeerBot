@@ -4,6 +4,7 @@ using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Win32;
 using RobotControl;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
@@ -53,6 +54,8 @@ namespace GUI
             LoadCoordinatesToCommand = new ActionCommand(LoadCoordinatesTo);
             MoveCommandUpCommand = new ActionCommand(MoveCommandUp);
             MoveCommandDownCommand = new ActionCommand(MoveCommandDown);
+            MoveCoordinateUpCommand = new ActionCommand(MoveCoordinateUp);
+            MoveCoordinateDownCommand = new ActionCommand(MoveCoordinateDown);
             ExecuteCommandsCommand = new ActionCommand(ExecuteCommands);
             SetTimeoutCommand = new ActionCommand(SetTimeout);
         }
@@ -587,6 +590,18 @@ namespace GUI
             set;
         }
 
+        public ActionCommand MoveCoordinateUpCommand
+        {
+            get;
+            set;
+        }
+
+        public ActionCommand MoveCoordinateDownCommand
+        {
+            get;
+            set;
+        }
+
         public ActionCommand ExecuteCommandsCommand
         {
             get;
@@ -884,13 +899,13 @@ namespace GUI
         {
             int index = Commands.IndexOf(SelectedCommand);
 
-            if(Commands.Count > 1 && index < Commands.Count-1)
+            if (Commands.Count > 1 && index < Commands.Count - 1)
             {
                 RobotCommand auslagerung = _robot.CommandsList[index];
                 _robot.CommandsList[index] = _robot.CommandsList[index + 1];
                 _robot.CommandsList[index + 1] = auslagerung;
             }
-            
+
 
             Commands = new ObservableCollection<RobotCommand>(_robot.CommandsList);
             OnPropertyChanged("Commands");
@@ -900,16 +915,49 @@ namespace GUI
         {
             int index = Commands.IndexOf(SelectedCommand);
 
-            if(Commands.Count > 1 && index > 0)
+            if (Commands.Count > 1 && index > 0)
             {
-            RobotCommand auslagerung = _robot.CommandsList[index];
-            _robot.CommandsList[index] = _robot.CommandsList[index - 1];
-            _robot.CommandsList[index - 1] = auslagerung;
+                RobotCommand auslagerung = _robot.CommandsList[index];
+                _robot.CommandsList[index] = _robot.CommandsList[index - 1];
+                _robot.CommandsList[index - 1] = auslagerung;
             }
-            
+
 
             Commands = new ObservableCollection<RobotCommand>(_robot.CommandsList);
             OnPropertyChanged("Commands");
+        }
+
+        private void MoveCoordinateDown()
+        {
+            int index = Coordinates.IndexOf(SelectedCoordinate);
+            List<Coordinate> liste = new List<Coordinate>(Coordinates);
+
+            if (liste.Count > 1 && index < liste.Count - 1)
+            {
+                Coordinate auslagerung = liste[index];
+                liste[index] = liste[index + 1];
+                liste[index + 1] = auslagerung;
+            }
+
+
+            Coordinates = new ObservableCollection<Coordinate>(liste);
+            OnPropertyChanged("Coordinates");
+        }
+
+        private void MoveCoordinateUp()
+        {
+            int index = Coordinates.IndexOf(SelectedCoordinate);
+            List<Coordinate> liste = new List<Coordinate>(Coordinates); 
+            if (liste.Count > 1 && index > 0)
+            {
+                Coordinate auslagerung = liste[index];
+                liste[index] = liste[index - 1];
+                liste[index - 1] = auslagerung;
+            }
+
+
+            Coordinates = new ObservableCollection<Coordinate>(liste);
+            OnPropertyChanged("Coordinates");
         }
 
         
