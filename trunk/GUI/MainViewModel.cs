@@ -17,6 +17,7 @@ namespace GUI
     {
 
         GeneralViewModel _generalViewModel;
+        BeerBotViewModel _beerBotViewModel;
         private MoveMasterRobot _robot;
         bool initialization = true;
         public MainViewModel()
@@ -25,6 +26,7 @@ namespace GUI
             SaveSettings = new ActionCommand(SaveSettingsCommand);
             ReadSettings();
             _generalViewModel = new GeneralViewModel(_robot);
+            _beerBotViewModel = new BeerBotViewModel(_robot);
             initialization = false;
         }
 
@@ -133,6 +135,7 @@ namespace GUI
                     }
                     _isInitialized = _robot.IsInitialized;
                     _generalViewModel.IsInitialized = _isInitialized;
+                    _beerBotViewModel.IsInitialized = _isInitialized;
             }
                 
         }
@@ -227,6 +230,18 @@ namespace GUI
             set
             {
                 _generalViewModel = value;
+            }
+        }
+
+        public BeerBotViewModel BeerBotViewModelProp
+        {
+            get
+            {
+                return _beerBotViewModel;
+            }
+            set
+            {
+                _beerBotViewModel = value;
             }
         }
         private StopBits _stopBits;

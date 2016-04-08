@@ -12,9 +12,13 @@ using System.Xml.Linq;
 
 namespace RobotControl
 {
+    
     public class MoveMasterRobot : IRobot
     {
         #region Fields
+
+        public event CommandsChangedEventHandler commandsChanged;
+        
         private SerialPort _connection;
 
         private ManualResetEvent _mre = new ManualResetEvent(false);
@@ -312,6 +316,7 @@ namespace RobotControl
             _isBusy = true;
             foreach (RobotCommand command in commands)
             {
+                commandsChanged(this, commands.IndexOf(command));
                 SendMessage(command,true);
             }
             _isBusy = false;
